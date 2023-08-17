@@ -2,15 +2,6 @@
 if (!file.exists(output.folder)){
   dir.create(output.folder, recursive = TRUE)}
 
-# Create zip file
-zipName <- paste0(db.name,"_feasibility")
-tempDir <- zipName
-tempDirCreated <- FALSE
-if (!dir.exists(tempDir)) {
-  dir.create(tempDir)
-  tempDirCreated <- TRUE
-}
-
 start <- Sys.time()
 
 # Start log
@@ -19,22 +10,26 @@ logger <- create.logger()
 logfile(logger) <- log_file
 level(logger) <- "INFO"
 
-# Counts
-output_feasibility <- cdm[[cohort_table_name]] %>% 
-  group_by(cohort_definition_id) %>% 
-  tally() %>% 
-  collect() %>% 
-  right_join(FC_cohorts, by = c("cohort_definition_id")) %>% mutate(n = as.numeric(n)) %>% mutate(n = if_else(is.na(n), 0, n)) %>% mutate(n = ifelse(n <= 5, NA, n)) %>% select(cohort_name,n)
-info(logger, 'GOT COUNTS')
-
-# Export csv
-write.csv(output_feasibility,
-          file = file.path(
-            tempDir,
-            paste0(db.name,"_ded.csv")
-          ),
-          row.names = FALSE
+# Feasibility step
+output_feasibility <- executeChecks(
+cdm,
+ingredients = c(),    # put all the drugs on ingredient level here
+subsetToConceptId = NULL,
+checks = c("missing", "exposureDuration", "type", "route", "sourceConcept",
+"daysSupply", "verbatimEndDate", "dose", "sig", "quantity", "histogram"),
+minCellCount = 5,
+sample = 1e+06,
+tablePrefix = NULL,
+earliestStartDate = "2010-01-01",
+verbose = FALSE
 )
+
+## Export csv from DED package
+result <- writeResultToDisk(
+  resultList = output_feasibility ,
+  databaseId = db.name,
+  outputFolder = output.folder)
+
 
 info(logger, 'SAVED RESULTS IN THE OUTPUT FOLDER')
 Sys.time() - start
