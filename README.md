@@ -1,5 +1,4 @@
 # MegaStudy
-
 ## Feasiblity step
 This is a script to run to get the Feasibility counts for the MegaStudy.
 You should just interact with the file CodeToRun.R.
