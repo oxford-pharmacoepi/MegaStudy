@@ -1,5 +1,5 @@
 # This is the only code the user should interact with
-# Gets the Feasibility Counts for the MegaStudy
+# Gets the Feasibility Information for the MegaStudy
 
 # Required packages
 library("DBI")
@@ -10,6 +10,7 @@ library("CDMConnector")
 library("here")
 library("log4r")
 library("zip")
+library("DrugExposureDiagnostics")
 
 # Database name or acronym (e.g. for CPRD AURUM use "CPRDAurum")
 db.name <- "..."
