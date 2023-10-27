@@ -1,10 +1,10 @@
-# MegaStudy
+# Welcome to the MegaStudy
 ## Feasibility step
 
-This project will provide you with the code you need to run the Feasibility step for the MegaStudy.
+The folder "Feasibility Code" will provide you with the code you need to run the Feasibility step for the MegaStudy.
 
 ### Instructions
-Please clone this repository into your R environment.
+Please clone the entire repository into your R environment.
 
 You only need to interact with the file CodeToRun.R
 Please fill in all the necessary information according to your situation. 
