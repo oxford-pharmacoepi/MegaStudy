@@ -29,4 +29,4 @@ dbName <- "..." # name of the database, use acronym in capital letters (eg. "CPR
 
 
 # Run the study
-source(here("Feasibility Code","RunFeasibility.R"))
+source(here("RunFeasibility.R"))

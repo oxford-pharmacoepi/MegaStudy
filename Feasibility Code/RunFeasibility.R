@@ -1,6 +1,6 @@
 
 # Define output folder ----
-outputFolder <- here::here("Feasibility Code","Results")   
+outputFolder <- here::here("Results")   
 # Create output folder if it doesn't exist
 if (!file.exists(outputFolder)){
   dir.create(outputFolder, recursive = TRUE)}
