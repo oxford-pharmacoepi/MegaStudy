@@ -32,7 +32,7 @@ if (!dir.exists(DATA_DIRECTORY)) {
 subDirs <- list.dirs(DATA_DIRECTORY, full.names = TRUE, recursive = FALSE)
 if (identical(subDirs, character(0))) {
   stop(glue("No subdirectories found in '{DATA_DIRECTORY}'. Please make sure to
-            store the results per database in a separate folder."))
+            store the results (per database) in a separate folder."))
 }
 
 commonInputsInitValue <- c("INIT")
