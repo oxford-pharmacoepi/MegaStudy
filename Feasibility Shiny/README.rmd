@@ -1,3 +1,9 @@
+
+---
+output: github_document
+---
+
+
 # Feasibility Shiny
 
 This step is optional if you want to look at your results before sending them back to us. This code contains a shiny to view your results from the Feasibility Code (all but the "diagnosticsSummary")
