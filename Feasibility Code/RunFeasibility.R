@@ -94,7 +94,7 @@ output_feasibility <- executeChecks(
                   36878851
   ),    
   checks = c("missing", "exposureDuration","quantity","diagnosticsSummary"),
-  minCellCount = 5,
+  minCellCount = 10,
   sample = 10000,
   earliestStartDate = "2010-01-01",
   verbose = FALSE
