@@ -19,7 +19,12 @@ renv::activate()
 renv::restore()
 ```
 
+    ## - The library is already synchronized with the lockfile.
+
 Subsequently, please put your results folder (extracted from zip) into
-the “data” folder that you see in this R project.
+the “data” folder that you see in this R project. You can put all there
+is in the zip folder (including the log and snapshot, that does not
+break the code), however you would only need to put the folder in which
+your csv results are stored.
 
 Then open global.R and click “Run App” in the top right corner.
