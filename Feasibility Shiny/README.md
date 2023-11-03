@@ -19,8 +19,6 @@ renv::activate()
 renv::restore()
 ```
 
-    ## - The library is already synchronized with the lockfile.
-
 Subsequently, please put your results folder (extracted from zip) into
 the “data” folder that you see in this R project. You can put all there
 is in the zip folder (including the log and snapshot, that does not
