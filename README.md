@@ -16,5 +16,3 @@ If everything worked you should get a zip folder in your working directory entit
 Please upload this in the EHDEN teams in the folder "feasibility".
 
 Thank you for running the feasibility step!
-
-
