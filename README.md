@@ -12,9 +12,7 @@ The folder "Feasibility Shiny" will provide you with a Shiny code with which you
 
 ## Returning results
 
-If everything worked you should get three items in your "Results" folder, the log.txt, the snapshot csv and a zip folder with the diagnostics results.
-Please select the "Results" folder for "export". R will zip it for you. 
-Please send back this zipped folder to "theresa.burkard@ndorms.ox.ac.uk"
+If everything worked you should get a zip folder in your working directory entitled (Results_"database name".zip).
+Please upload this in the EHDEN teams in the folder "feasibility".
 
 Thank you for running the feasibility step!
-
