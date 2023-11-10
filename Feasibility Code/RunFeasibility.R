@@ -111,12 +111,13 @@ info(logger, 'SAVED DED RESULTS')
 
 
 ## zip everything together ---
-
+info(logger, 'ZIPPING RESULTS')
 zip(
   zipfile = here::here(paste0("Results_", cdmName(cdm), ".zip")),
   files = list.files(outputFolder),
   root = outputFolder
 )
+
 
 print("Done!")
 print("If all has worked, there should now be a zip file with your feasibility results in the output folder to share")
