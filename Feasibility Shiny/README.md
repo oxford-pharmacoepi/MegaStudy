@@ -23,6 +23,10 @@ Subsequently, please put your results folder (extracted from zip) into
 the “data” folder that you see in this R project. You can put all there
 is in the zip folder (including the log and snapshot, that does not
 break the code), however you would only need to put the folder in which
-your csv results are stored.
+your csv results are stored (it is the only one read from the Shiny
+code). However, the structure is important: inside the data folder you
+want another folder (or several folders if you have several databases)
+and therein the csv files. If there is more layers of folders than just
+one, it will not work.
 
 Then open global.R and click “Run App” in the top right corner.
