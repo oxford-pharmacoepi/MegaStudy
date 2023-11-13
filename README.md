@@ -12,7 +12,7 @@ The folder "Feasibility Shiny" will provide you with a Shiny code with which you
 
 ## Returning results
 
-If everything worked you should get a zip folder in your working directory entitled (Results_"database name".zip).
+If everything worked you should get a zip folder on the same level as the .Rproj files named "Results_(database name).zip".
 Please upload this in the EHDEN teams in the folder "feasibility".
 
 Thank you for running the feasibility step!
