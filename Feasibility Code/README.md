@@ -17,8 +17,8 @@ If you have another database management system we will find out how it goes. Ple
 
 ## Returning results
 
-If everything worked you should get a zip folder in your working directory entitled (Results_"database name".zip).
-Please upload this in the EHDEN teams in the folder "feasibility".
+If everything worked you should get a zip file on the same level as the Feasibility_Code.Rproj file named "Results_(database name).zip".
+Please upload this in the EHDEN teams in the folder "feasibility"/"uploads from data partners/"new results".
 
 Thank you for running the feasibility step!
 

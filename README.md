@@ -13,6 +13,6 @@ The folder "Feasibility Shiny" will provide you with a Shiny code with which you
 ## Returning results
 
 If everything worked you should get a zip file on the same level as the Feasibility_Code.Rproj file named "Results_(database name).zip".
-Please upload this in the EHDEN teams in the folder "feasibility".
+Please upload this in the EHDEN teams in the folder "feasibility"/"uploads from data partners/"new results".
 
 Thank you for running the feasibility step!
