@@ -9,6 +9,9 @@ The folder "Feasibility Code" will provide you with the code you need to run the
 
 The folder "Feasibility Shiny" will provide you with a Shiny code with which you can look at your results in case this if of interest to you before sharing the results with us.
 
+## Issues
+
+If you encounter problems or have questions please open an issue here in github.
 
 ## Returning results
 

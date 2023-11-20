@@ -19,7 +19,6 @@ renv::activate()
 renv::restore()
 ```
 
-
 Subsequently, please put your results folder (extracted from zip) into
 the “data” folder that you see in this R project. You can put all there
 is into the zip folder (including the log and snapshot, that does not
@@ -31,3 +30,8 @@ databases) and therein the csv files. If there is more layers of folders
 than just one, it will not work.
 
 Then open global.R and click “Run App” in the top right corner.
+
+## Issues
+
+If you encounter problems or have questions please open an issue here in
+github.

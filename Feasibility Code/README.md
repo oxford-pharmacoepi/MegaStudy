@@ -15,6 +15,10 @@ The package CDM Connector does not support the database management system BIG QU
 It does support SQLServer, postgresql, redshift, snowflake, oracle, and spark. 
 If you have another database management system we will find out how it goes. Please report this as an issue in github.
 
+## Issues
+
+If you encounter problems or have questions please open an issue here in github.
+
 ## Returning results
 
 If everything worked you should get a zip file on the same level as the Feasibility_Code.Rproj file named "Results_(database name).zip".
