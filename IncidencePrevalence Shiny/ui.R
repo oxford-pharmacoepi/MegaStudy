@@ -235,7 +235,7 @@ ui <- dashboardPage(
             plotlyOutput(
               "incidence_estimates_plot",
               height = "1000px",
-              width = "1100px"
+              width = "1150px"
             ) %>%
               withSpinner(),
             h4("Download figure"),
@@ -282,7 +282,7 @@ ui <- dashboardPage(
           pickerInput(
             inputId = "prevalence_estimates_outcome_cohort_name",
             label = "Outcome name",
-            choices = unique(prevalence$outcome_cohort_name),
+            choices = sort(unique(prevalence$outcome_cohort_name)),
             selected = unique(prevalence$outcome_cohort_name),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
@@ -450,7 +450,7 @@ ui <- dashboardPage(
             plotlyOutput(
               "prevalence_estimates_plot",
               height = "1000px",
-              width = "1100px"
+              width = "1150px"
             ) %>%
               withSpinner(),
             h4("Download figure"),
