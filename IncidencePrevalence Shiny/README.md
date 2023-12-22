@@ -19,8 +19,6 @@ renv::activate()
 renv::restore()
 ```
 
-    ## - The library is already synchronized with the lockfile.
-
 Please create a “data” folder on the same level as the .Rproj and put
 the following three csv files into it (or multiples if you have several
 databases): “dbName”\_snapshot.csv, “dbName”\_Incidence.csv,
