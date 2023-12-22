@@ -19,8 +19,6 @@ renv::activate()
 renv::restore()
 ```
 
-    ## - The library is already synchronized with the lockfile.
-
 Subsequently, please create a folder named “data” and put your results
 folder (extracted from zip) into this folder. You can put all there is
 (including the log and snapshot, it does not break the code), however
