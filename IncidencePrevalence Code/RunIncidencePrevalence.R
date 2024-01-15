@@ -20,7 +20,6 @@ cdm <- cdmFromCon(
   writeSchema = c(schema = writeSchema, prefix = writePrefix),
   cdmName = dbName
 )
-info(logger, 'CDM OBJECT CREATED')
 
 
 # cdm snapshot ----
@@ -53,7 +52,6 @@ cdm <- generateConceptCohortSet(
   end = "observation_period_end_date",
   overwrite = TRUE
 )
-info(logger, "DRUG COHORTS CREATED")
 
 
 ## get denominator population ----
@@ -72,11 +70,11 @@ cdm <- generateDenominatorCohortSet(
   daysPriorObservation = 0,
   overwrite = TRUE
 )
-info(logger, "DENOMINATOR COHORT GENERATED")
+
 
 ## get incidence proportion ---
 ## drug cohorts (repetitive events allowed) with 30 day washout period
-info(logger, "ESTIMATE INCIDENCE PROPORTIONS")
+info(logger, "ESTIMATE INCIDENCE RATES")
 inc <- estimateIncidence(
   cdm = cdm,
   denominatorTable = "denominator",
@@ -88,7 +86,11 @@ inc <- estimateIncidence(
   minCellCount = 10,
   temporary = FALSE
 )
-info(logger, "INCIDENCE PROPORTIONS ESTIMATED")
+info(logger, "INCIDENCE ATTRITION")
+write.csv(incidenceAttrition(inc),
+          here("storage", paste0(
+            "incidence_attrition_", cdmName(cdm), ".csv"
+          )))
 
 ## get annual period prevalence ---
 info(logger, "ESTIMATE PERIOD PREVALENCE")
@@ -101,7 +103,12 @@ prev <- estimatePeriodPrevalence(
   minCellCount = 10,
   temporary = FALSE
 )
-info(logger, "PERIOD PREVALENCE ESTIMATED")
+
+info(logger, "PREVALENCE ATTRITION")
+write.csv(prevalenceAttrition(prev),
+          here("storage", paste0(
+            "prevalence_attrition_", cdmName(cdm), ".csv"
+          )))
 
 ## export results
 info(logger, "ZIP INCPREV RESULTS")
@@ -110,7 +117,6 @@ exportIncidencePrevalenceResults(
   zipName = paste0(cdmName(cdm), "_IncidencePrevalenceResults"),
   outputFolder = outputFolder
 )
-info(logger, "INCPREV RESULTS ZIPPED")
 
 
 ## zip everything together ---
@@ -120,8 +126,6 @@ zip(
   files = list.files(outputFolder),
   root = outputFolder
 )
-info(logger, "EVERYTHING ZIPPED")
-
 
 print("Done!")
 print("If all has worked, there should now be a zip file with your Incidence Prevalence results in the output folder to share")

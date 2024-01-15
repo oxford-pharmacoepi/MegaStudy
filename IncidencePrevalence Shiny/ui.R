@@ -17,6 +17,18 @@ ui <- dashboardPage(
         )
       ),
       menuItem(
+        text = "Attrition",
+        tabName = "attrition",
+        menuSubItem(
+          text = "Incidence Attrition",
+          tabName = "incidence_attrition"
+        ),
+        menuSubItem(
+          text = "Prevalence Attrition",
+          tabName = "prevalence_attrition"
+        )
+      ),
+      menuItem(
         text = "Study results",
         tabName = "study_results",
         menuSubItem(
@@ -48,6 +60,8 @@ ui <- dashboardPage(
         target = "_blank"
         )
       ),
+
+      
       # cdm snapshot ------
       tabItem(
         tabName = "cdm_snapshot",
@@ -55,6 +69,29 @@ ui <- dashboardPage(
         tags$hr(),
         downloadButton(
           "gt_cdm_snaphot_word",
+          "Download table as word"
+        )
+      ),
+      
+      
+      # incidence_attrition ------
+      tabItem(
+        tabName = "incidence_attrition",
+        htmlOutput("tbl_incidence_attrition"),
+        tags$hr(),
+        downloadButton(
+          "gt_incidence_attrition_word",
+          "Download table as word"
+        )
+      ),
+      
+      # prevalence_attrition ------
+      tabItem(
+        tabName = "prevalence_attrition",
+        htmlOutput("tbl_prevalence_attrition"),
+        tags$hr(),
+        downloadButton(
+          "gt_prevalence_attrition_word",
           "Download table as word"
         )
       ),

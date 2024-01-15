@@ -15,6 +15,35 @@ server <- function(input, output, session) {
     }
   )
   
+  # incidence_attrition ----
+  output$tbl_incidence_attrition <- renderText(kable(incidence_attrition) %>%
+                                                 kable_styling("striped", full_width = F) )
+  
+  output$gt_incidence_attrition_word <- downloadHandler(
+    filename = function() {
+      "incidence_attrition.docx"
+    },
+    content = function(file) {
+      x <- gt(incidence_attrition)
+      gtsave(x, file)
+    }
+  )
+  
+  # prevalence_attrition ----
+  output$tbl_prevalence_attrition <- renderText(kable(prevalence_attrition) %>%
+                                                 kable_styling("striped", full_width = F) )
+  
+  output$gt_prevalence_attrition_word <- downloadHandler(
+    filename = function() {
+      "prevalence_attrition.docx"
+    },
+    content = function(file) {
+      x <- gt(prevalence_attrition)
+      gtsave(x, file)
+    }
+  )
+  
+  
   # code use ----
   getCodeUse <- reactive({
     
