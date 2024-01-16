@@ -77,23 +77,69 @@ ui <- dashboardPage(
       # incidence_attrition ------
       tabItem(
         tabName = "incidence_attrition",
-        htmlOutput("tbl_incidence_attrition"),
-        tags$hr(),
-        downloadButton(
-          "gt_incidence_attrition_word",
-          "Download table as word"
-        )
+        h3("Incidence attrition"),
+        p("Number of patients retained in the study are shown below per study outcome."),
+        p("There is the option to filter by study outcome (drug) and by database"),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "incidence_attrition_cdm_name",
+            label = "CDM name",
+            choices = unique(incidence_attrition$cdm_name),
+            selected = unique(incidence_attrition$cdm_name),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "incidence_attrition_outcome_cohort_name",
+            label = "Outcome name",
+            choices = sort(unique(incidence_attrition$outcome_cohort_name)),
+            selected = unique(incidence_attrition$outcome_cohort_name),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
+        DT::dataTableOutput(outputId = "dt_incidence_attrition"),
+        div(style="display:inline-block",
+            downloadButton("incidence_attrition_download_table", "Download table"), 
+            style="display:inline-block; float:right")
       ),
-      
+
       # prevalence_attrition ------
       tabItem(
         tabName = "prevalence_attrition",
-        htmlOutput("tbl_prevalence_attrition"),
-        tags$hr(),
-        downloadButton(
-          "gt_prevalence_attrition_word",
-          "Download table as word"
-        )
+        h3("Prevalence attrition"),
+        p("Number of patients retained in the study are shown below per study outcome."),
+        p("There is the option to filter by study outcome (drug) and by database"),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "prevalence_attrition_cdm_name",
+            label = "CDM name",
+            choices = unique(prevalence_attrition$cdm_name),
+            selected = unique(prevalence_attrition$cdm_name),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "prevalence_attrition_outcome_cohort_name",
+            label = "Outcome name",
+            choices = sort(unique(prevalence_attrition$outcome_cohort_name)),
+            selected = unique(prevalence_attrition$outcome_cohort_name),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
+        DT::dataTableOutput(outputId = "dt_prevalence_attrition"),
+        div(style="display:inline-block",
+            downloadButton("prevalence_attrition_download_table", "Download table"), 
+            style="display:inline-block; float:right")
       ),
       
       ### incidence ----

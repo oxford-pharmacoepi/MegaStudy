@@ -100,15 +100,15 @@ for(i in seq_along(incidence_attrition_files)){
   incidence_attrition[[i]]<-readr::read_csv(incidence_attrition_files[[i]], 
                                             show_col_types = FALSE) 
 }
-incidence_attrition <- dplyr::bind_rows(incidence_attrition) 
 incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
                                                   "General population",
                                                   denominator_target_cohort_name)) %>%
   filter(denominator_age_group == "0 to 150",
-         denominator_sex == "Both") %>% 
-  select(reason,cdm_name, outcome_cohort_name, excluded_subjects) %>% 
-  pivot_wider(names_from = cdm_name, values_from = excluded_subjects)
+         denominator_sex == "Both") %>%
+  select(c("cdm_name", "reason","outcome_cohort_name", 
+           "number_subjects")) 
+
 
 # prevalence  ------
 prevalence_files<-results[stringr::str_detect(results, ".csv")]
@@ -133,13 +133,12 @@ for(i in seq_along(prevalence_attrition_files)){
   prevalence_attrition[[i]]<-readr::read_csv(prevalence_attrition_files[[i]], 
                                              show_col_types = FALSE) 
 }
-prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) 
 prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
                                                   "General population",
                                                   denominator_target_cohort_name)) %>%
   filter(denominator_age_group == "0 to 150",
-         denominator_sex == "Both") %>% 
-  select(reason,cdm_name, outcome_cohort_name, excluded_subjects) %>% 
-  pivot_wider(names_from = cdm_name, values_from = excluded_subjects)
+         denominator_sex == "Both") %>%
+  select(c("cdm_name", "reason","outcome_cohort_name", 
+           "number_subjects")) 
  

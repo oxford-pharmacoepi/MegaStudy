@@ -16,33 +16,54 @@ server <- function(input, output, session) {
   )
   
   # incidence_attrition ----
-  output$tbl_incidence_attrition <- renderText(kable(incidence_attrition) %>%
-                                                 kable_styling("striped", full_width = F) )
-  
-  output$gt_incidence_attrition_word <- downloadHandler(
+  getIncAtt <- reactive({
+    
+    incidence_attrition <- incidence_attrition %>% 
+      pivot_wider(names_from = cdm_name, values_from = number_subjects)
+    
+  })
+  ### download table ----
+  output$incidence_attrition_download_table <- downloadHandler(
     filename = function() {
-      "incidence_attrition.docx"
+      "incidence_attrition_Table.csv"
     },
     content = function(file) {
-      x <- gt(incidence_attrition)
-      gtsave(x, file)
+      write_csv(getIncAtt(), file)
     }
   )
-  
-  # prevalence_attrition ----
-  output$tbl_prevalence_attrition <- renderText(kable(prevalence_attrition) %>%
-                                                 kable_styling("striped", full_width = F) )
-  
-  output$gt_prevalence_attrition_word <- downloadHandler(
+  ### table estimates ----
+  output$dt_incidence_attrition <- renderDataTable({
+    datatable(getIncAtt(),
+              rownames = FALSE,
+              extensions = "Buttons",
+              options = list(scrollX = TRUE, scrollCollapse = TRUE)
+    )
+  })
+
+  # incidence_attrition ----
+  getPrevAtt <- reactive({
+    
+    prevalence_attrition <- prevalence_attrition %>% 
+      pivot_wider(names_from = cdm_name, values_from = number_subjects)
+    
+  })
+  ### download table ----
+  output$prevalence_attrition_download_table <- downloadHandler(
     filename = function() {
-      "prevalence_attrition.docx"
+      "prevalence_attrition_Table.csv"
     },
     content = function(file) {
-      x <- gt(prevalence_attrition)
-      gtsave(x, file)
+      write_csv(getPrevAtt(), file)
     }
   )
-  
+  ### table estimates ----
+  output$dt_prevalence_attrition <- renderDataTable({
+    datatable(getPrevAtt(),
+              rownames = FALSE,
+              extensions = "Buttons",
+              options = list(scrollX = TRUE, scrollCollapse = TRUE)
+    )
+  })
   
   # code use ----
   getCodeUse <- reactive({

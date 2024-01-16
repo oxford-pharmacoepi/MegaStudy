@@ -20,12 +20,12 @@ renv::restore()
 ```
 
 Please create a “data” folder on the same level as the .Rproj and put
-the following five csv files into it (or multiples if you have several
-databases): “snapshot_"dbName”.csv, “dbName”\_Incidence.csv,
-“dbName”\_Prevalence.csv, "incidence_attrition_dbName”.csv, and "prevalence_attrition_dbName”.csv.
-You can also put folders into the “data”
-folder with the csv’s therein, the code will look for the files also in
-sub-directories.
+the following three csv files into it (or multiples if you have several
+databases): “snapshot\_”dbName”.csv, “dbName”\_Incidence.csv,
+“dbName”\_Prevalence.csv, “incidence_attrition_dbName”.csv, and
+“prevalence_attrition_dbName”.csv. You can also put folders into the
+“data” folder with the csv’s therein, the code will look for the files
+also in sub-directories, but not zip files.
 
 Then open global.R and click “Run App” in the top right corner.
 
