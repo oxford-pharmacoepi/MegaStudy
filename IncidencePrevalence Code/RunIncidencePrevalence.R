@@ -113,7 +113,7 @@ write.csv(prevalenceAttrition(prev),
 ## export results
 info(logger, "ZIP INCPREV RESULTS")
 exportIncidencePrevalenceResults(
-  resultList = list("Prevalence" = prev, "Incidence" = inc),
+  resultList = list("prevalence" = prev, "incidence" = inc),
   zipName = paste0(cdmName(cdm), "_IncidencePrevalenceResults"),
   outputFolder = outputFolder
 )
