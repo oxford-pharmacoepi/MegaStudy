@@ -84,7 +84,7 @@ inc <- estimateIncidence(
   outcomeWashout = 30,
   repeatedEvents = FALSE,
   minCellCount = 10,
-  temporary = FALSE
+  temporary = TRUE
 )
 info(logger, "INCIDENCE ATTRITION")
 write.csv(incidenceAttrition(inc),
@@ -101,7 +101,7 @@ prev <- estimatePeriodPrevalence(
   interval = "years",
   completeDatabaseIntervals = FALSE,
   minCellCount = 10,
-  temporary = FALSE
+  temporary = TRUE
 )
 
 info(logger, "PREVALENCE ATTRITION")

@@ -138,7 +138,7 @@ concept_objects$cytarabine_any <- cs(descendants(1311078,902730,36863408), name 
 ## daunorubicin (single)
 daunorubicin_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "daunorubicin", ingredientRange = c(1,1),
                                                       withConceptDetails = FALSE) 
-daunorubicin_ids <- do.call(c, daunorubicin_no_combination_ids)
+daunorubicin_ids <- as.numeric(do.call(c, daunorubicin_no_combination_ids))
 concept_objects$daunorubicin_no_combination <- cs(daunorubicin_ids, name = "daunorubicin_no_combination")
 
 ## daunorubicin + cytarabine combination drugs
@@ -152,13 +152,13 @@ tacrolimus_no_topical_ids <- getDrugIngredientCodes(cdm = cdm, name = "tacrolimu
                                                                  "Injection","Prefilled Syringe","Intravenous Solution","Granules for Oral Suspension"
                                                     ),
                                                     withConceptDetails = FALSE) 
-tacrolimus_ids <- do.call(c, tacrolimus_no_topical_ids)
+tacrolimus_ids <- as.numeric(do.call(c, tacrolimus_no_topical_ids))
 concept_objects$tacrolimus_no_topical <- cs(tacrolimus_ids, name = "tacrolimus_no_topical")
 
 ## tretinoin oral only
 tretinoin_oral_ids <- getDrugIngredientCodes(cdm = cdm, name = "tretinoin", ingredientRange = c(1,1), doseForm = c("Oral Capsule","Oral Tablet"),
                                              withConceptDetails = FALSE) 
-tretinoin_ids <- do.call(c, tretinoin_oral_ids)
+tretinoin_ids <- as.numeric(do.call(c, tretinoin_oral_ids))
 concept_objects$tretinoin_oral <- cs(tretinoin_ids, name = "nicotine_no_combination")
 
 
@@ -184,63 +184,63 @@ concept_objects$piperacillin_tazobactam <- cs(piperacillin_tazobactam_ids, name 
 
 arsenic_trioxide_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "arsenic trioxide", ingredientRange = c(1,1),
                                                       withConceptDetails = FALSE) 
-arsenic_trioxide_ids <- do.call(c, arsenic_trioxide_no_combination_ids)
+arsenic_trioxide_ids <- as.numeric(do.call(c, arsenic_trioxide_no_combination_ids))
 concept_objects$arsenic_trioxide_no_combination <- cs(arsenic_trioxide_ids, name = "arsenic_trioxide_no_combination")
 
 ## nicotine no combinations
 
 nicotine_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "nicotine", ingredientRange = c(1,1),
                                                       withConceptDetails = FALSE) 
-nicotine_ids <- do.call(c, nicotine_no_combination_ids)
+nicotine_ids <- as.numeric(do.call(c, nicotine_no_combination_ids))
 concept_objects$nicotine_no_combination <- cs(nicotine_ids, name = "nicotine_no_combination")
 
 ## cyclosporine no combinations
 
 cyclosporine_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "cyclosporine", ingredientRange = c(1,1),
                                                       withConceptDetails = FALSE) 
-cyclosporine_ids <- do.call(c, cyclosporine_no_combination_ids)
+cyclosporine_ids <- as.numeric(do.call(c, cyclosporine_no_combination_ids))
 concept_objects$cyclosporine_no_combination <- cs(cyclosporine_ids, name = "cyclosporine_no_combination")
 
 ## clarithromycin no combinations
 
 clarithromycin_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "clarithromycin", ingredientRange = c(1,1),
                                                             withConceptDetails = FALSE) 
-clarithromycin_ids <- do.call(c, clarithromycin_no_combination_ids)
+clarithromycin_ids <- as.numeric(do.call(c, clarithromycin_no_combination_ids))
 concept_objects$clarithromycin_no_combination <- cs(clarithromycin_ids, name = "clarithromycin_no_combination")
 
 ## "penicillin V"  no combinations
 
 penicillin_V_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "penicillin V", ingredientRange = c(1,1),
                                                           withConceptDetails = FALSE) 
-penicillin_V_ids <- do.call(c, penicillin_V_no_combination_ids)
+penicillin_V_ids <- as.numeric(do.call(c, penicillin_V_no_combination_ids))
 concept_objects$penicillin_V_no_combination <- cs(penicillin_V_ids, name = "penicillin_V_no_combination")
 
 ## "penicillin G"  no combinations
 
 penicillin_G_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "penicillin G", ingredientRange = c(1,1),
                                                           withConceptDetails = FALSE) 
-penicillin_G_ids <- do.call(c, penicillin_G_no_combination_ids)
+penicillin_G_ids <- as.numeric(do.call(c, penicillin_G_no_combination_ids))
 concept_objects$penicillin_G_no_combination <- cs(penicillin_G_ids, name = "penicillin_G_no_combination")
 
 ## "amoxicillin" no combinations
 
 amoxicillin_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "amoxicillin", ingredientRange = c(1,1),
                                                          withConceptDetails = FALSE) 
-amoxicillin_ids <- do.call(c, amoxicillin_no_combination_ids)
+amoxicillin_ids <- as.numeric(do.call(c, amoxicillin_no_combination_ids))
 concept_objects$amoxicillin_no_combination <- cs(amoxicillin_ids, name = "amoxicillin_no_combination")
 
 ##  "meropenem"   no combinations
 
 meropenem_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "meropenem", ingredientRange = c(1,1),
                                                        withConceptDetails = FALSE) 
-meropenem_ids <- do.call(c, meropenem_no_combination_ids)
+meropenem_ids <- as.numeric(do.call(c, meropenem_no_combination_ids))
 concept_objects$meropenem_no_combination <- cs(meropenem_ids, name = "meropenem_no_combination")
 
 ## "streptokinase"  no combinations
 
 streptokinase_no_combination_ids <- getDrugIngredientCodes(cdm = cdm, name = "streptokinase", ingredientRange = c(1,1),
                                                            withConceptDetails = FALSE) 
-streptokinase_ids <- do.call(c, streptokinase_no_combination_ids)
+streptokinase_ids <- as.numeric(do.call(c, streptokinase_no_combination_ids))
 concept_objects$streptokinase_no_combination <- cs(streptokinase_ids, name = "streptokinase_no_combination")
 
 
