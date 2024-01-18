@@ -58,7 +58,7 @@ results<-list.files(here("data"), recursive = TRUE,
 
 # cdm snapshot ------
 cdm_snapshot_files<-results[stringr::str_detect(results, ".csv")]
-cdm_snapshot_files<-results[stringr::str_detect(results, "snapshot")]
+cdm_snapshot_files<-cdm_snapshot_files[stringr::str_detect(cdm_snapshot_files, "snapshot")]
 cdm_snapshot <- list()
 for(i in seq_along(cdm_snapshot_files)){
   cdm_snapshot[[i]]<-readr::read_csv(cdm_snapshot_files[[i]], 
@@ -78,12 +78,12 @@ cdm_snapshot <- cdm_snapshot %>%
 
 # incidence ------
 incidence_files<-results[stringr::str_detect(results, ".csv")]
-incidence_files<-incidence_files[stringr::str_detect(incidence_files, "Incidence")]
+incidence_files<-incidence_files[stringr::str_detect(incidence_files, "incidence")]
 incidence_files<-incidence_files[stringr::str_detect(incidence_files, "attrition", negate = TRUE)]
 incidence <- list()
 for(i in seq_along(incidence_files)){
   incidence[[i]]<-readr::read_csv(incidence_files[[i]], 
-                                  show_col_types = FALSE) 
+                                  show_col_types = FALSE)
 }
 incidence <- dplyr::bind_rows(incidence) 
 incidence <- dplyr::bind_rows(incidence) %>% 
@@ -112,7 +112,7 @@ incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>%
 
 # prevalence  ------
 prevalence_files<-results[stringr::str_detect(results, ".csv")]
-prevalence_files<-prevalence_files[stringr::str_detect(prevalence_files, "Prevalence")]
+prevalence_files<-prevalence_files[stringr::str_detect(prevalence_files, "prevalence")]
 prevalence_files<-prevalence_files[stringr::str_detect(prevalence_files, "attrition", negate = TRUE)]
 prevalence <- list()
 for(i in seq_along(prevalence_files)){

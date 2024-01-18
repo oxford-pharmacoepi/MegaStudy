@@ -18,8 +18,10 @@ server <- function(input, output, session) {
   # incidence_attrition ----
   getIncAtt <- reactive({
     
-    incidence_attrition <- incidence_attrition %>% 
-      pivot_wider(names_from = cdm_name, values_from = number_subjects)
+    incidence_attrition %>% 
+      filter(cdm_name %in% input$incidence_attrition_cdm_name,
+             outcome_cohort_name %in% input$incidence_attrition_outcome_cohort_name) %>%
+      pivot_wider(names_from = cdm_name, values_from = number_subjects) 
     
   })
   ### download table ----
@@ -36,15 +38,18 @@ server <- function(input, output, session) {
     datatable(getIncAtt(),
               rownames = FALSE,
               extensions = "Buttons",
-              options = list(scrollX = TRUE, scrollCollapse = TRUE)
+              options = list(scrollX = TRUE, scrollCollapse = TRUE, pageLength = 11)
     )
   })
 
-  # incidence_attrition ----
+
+  # prevalence_attrition ----
   getPrevAtt <- reactive({
     
-    prevalence_attrition <- prevalence_attrition %>% 
-      pivot_wider(names_from = cdm_name, values_from = number_subjects)
+    prevalence_attrition %>% 
+      filter(cdm_name %in% input$incidence_attrition_cdm_name,
+             outcome_cohort_name %in% input$incidence_attrition_outcome_cohort_name) %>%
+      pivot_wider(names_from = cdm_name, values_from = number_subjects) 
     
   })
   ### download table ----
@@ -61,91 +66,9 @@ server <- function(input, output, session) {
     datatable(getPrevAtt(),
               rownames = FALSE,
               extensions = "Buttons",
-              options = list(scrollX = TRUE, scrollCollapse = TRUE)
+              options = list(scrollX = TRUE, scrollCollapse = TRUE, pageLength = 11)
     )
   })
-  
-  # code use ----
-  getCodeUse <- reactive({
-    
-    validate(
-      need(input$cd_cdm != "", "Please select a database")
-    )
-    validate(
-      need(input$cd_cohort != "", "Please select a cohort")
-    )
-    
-    code_use <- code_use %>% 
-      select(c("cdm_name", "codelist_name",
-               "group_name", 
-               "strata_name", "strata_level",
-               "standard_concept_name", "standard_concept_name",
-               "source_concept_name",  "source_concept_id" ,   "domain_id",
-               "variable_name", "estimate")) %>% 
-      pivot_wider(names_from = variable_name, 
-                  values_from = estimate)
-    names(code_use)<-stringr::str_replace_all(names(code_use), "_", " ")
-    code_use
-    
-  })
-  
-  output$dt_code_use  <- DT::renderDataTable({
-    table_data <- getCodeUse()
-    
-    datatable(table_data, 
-              filter = "top",
-              rownames= FALSE) 
-  })
-  
-  
-  # index_codes ----
-  get_index_codes <- reactive({
-    
-    validate(
-      need(input$cd_cdm != "", "Please select a database")
-    )
-    validate(
-      need(input$cd_cohort != "", "Please select a cohort")
-    )
-    
-    index_codes <- index_codes %>% 
-      filter(cdm_name %in% input$cd_cdm,
-             cohort_name %in%  input$cd_cohort,
-             group_name %in%  input$cd_index_group_name,
-             strata_name %in%  input$cd_index_strata_name) %>% 
-      select(c("cdm_name", "cohort_name" ,
-               "group_name", 
-               "strata_name", "strata_level",
-               "standard_concept_name", "standard_concept_id",
-               "source_concept_name",  "source_concept_id" , 
-               "variable_name", "estimate")) %>% 
-      pivot_wider(names_from = variable_name, 
-                  values_from = estimate)
-    
-    
-    if(all(input$cd_index_group_name %in%  "Codelist")){
-      index_codes <- index_codes %>% 
-        select(!c(
-          "standard_concept_name", "standard_concept_id",
-          "source_concept_name",  "source_concept_id"
-        ))
-    }
-    
-    index_codes<-index_codes %>% 
-      arrange(desc(`Record count`))
-    
-    names(index_codes)<-stringr::str_replace_all(names(index_codes), "_", " ")
-    
-    index_codes
-    
-  })
-  
-  output$dt_index_codes  <- DT::renderDataTable({
-    table_data <- get_index_codes()
-    datatable(table_data, rownames= FALSE) 
-  })   
-  
-  
   
   ## incidence_estimates ----
   ### get estimates ----
@@ -406,7 +329,6 @@ server <- function(input, output, session) {
         prevalence = round(suppressWarnings(as.numeric(prevalence)), 4),
         prevalence_95CI_lower = round(suppressWarnings(as.numeric(prevalence_95CI_lower)), 4),
         prevalence_95CI_upper = round(suppressWarnings(as.numeric(prevalence_95CI_upper)), 4),
-        ,
         outcome_cohort_name = factor(
           outcome_cohort_name, 
           levels = c("tenecteplase",
