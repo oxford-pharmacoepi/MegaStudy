@@ -36,23 +36,20 @@ if (cdmName(cdm) == "SIDIAP") {
   info(logger, "FILTER DRUG EXPOSURE TABLE SIDIAP")
   cdm$drug_exposure <- cdm$drug_exposure %>%
     filter(drug_type_concept_id == 32839) %>%
-    compute()
+    computeQuery()
 }
 
-## Generate drug cohorts ----
-info(logger, "GENERATE DRUG COHORTS")
-source(here("Concepts generation.R"))
+## Generate drug concepts ----
+info(logger, "GENERATE DRUG CONCEPTS")
+source(here("drugs.R"))
 
-cdm <- generateConceptCohortSet(
+cdm <- generateDrugUtilisationCohortSet(
   cdm = cdm,
-  conceptSet = concept_objects,
-  name = "outcomes",
-  limit = "all",
-  requiredObservation = c(0, 0),
-  end = "observation_period_end_date",
-  overwrite = TRUE
+  name = "drug_cohorts",
+  conceptSet = concept_drugs,
+  cohortDateRange = as.Date(c('2010-01-01','2024-12-31')),
+  limit = "all"
 )
-
 
 ## get denominator population ----
 info(logger, "GENERATE DENOMINATOR COHORT")
@@ -68,20 +65,22 @@ cdm <- generateDenominatorCohortSet(
   ),
   sex = c("Both", "Female", "Male"),
   daysPriorObservation = 0,
+  requirementInteractions = TRUE,
   overwrite = TRUE
 )
 
 
-## get incidence proportion ---
-## drug cohorts (repetitive events allowed) with 30 day washout period
+## get incidence rates ---
+## since the aim is to estimate incidence proportions, I will need a 365 day washout to make sure people only contribute once
+## protocol says: repetitive events allowed (aka during study period, but not within interval) with 30 day washout period
 info(logger, "ESTIMATE INCIDENCE RATES")
 inc <- estimateIncidence(
   cdm = cdm,
   denominatorTable = "denominator",
-  outcomeTable = "outcomes",
+  outcomeTable = "drug_cohorts",
   interval = "years",
   completeDatabaseIntervals = FALSE,
-  outcomeWashout = 30,
+  outcomeWashout = 365,
   repeatedEvents = FALSE,
   minCellCount = 10,
   temporary = TRUE
@@ -97,7 +96,7 @@ info(logger, "ESTIMATE PERIOD PREVALENCE")
 prev <- estimatePeriodPrevalence(
   cdm = cdm,
   denominatorTable = "denominator",
-  outcomeTable = "outcomes",
+  outcomeTable = "drug_cohorts",
   interval = "years",
   completeDatabaseIntervals = FALSE,
   minCellCount = 10,
