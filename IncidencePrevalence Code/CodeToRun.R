@@ -4,8 +4,6 @@ renv::activate()
 renv::restore()
 
 library("devtools")
-library("BiocVersion")
-library("visR")
 library("odbc")
 library("RPostgres")
 library("DBI")
