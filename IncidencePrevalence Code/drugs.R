@@ -69,21 +69,21 @@ concept_drugs <- getDrugIngredientCodes(
 ## other that need more doing ----------------------------------------------------------------------------
 
 ## certolizumab has two ingredient codes
-certolizumab_both <- getDrugIngredientCodes(
+certolizumab <- getDrugIngredientCodes(
   cdm,
   name = c("certolizumab","certolizumab pegol"),
   doseForm = NULL,
   ingredientRange = c(1, 1),
   withConceptDetails = FALSE
 )
-concept_drugs[["certolizumab_both"]] <- purrr::list_c(certolizumab_both)
+concept_drugs[["certolizumab"]] <- purrr::list_c(certolizumab)
 
 
 ## cytarabine, I only want the extended release drug (liposomal form)
 ## ingredient 902730 "Cytarabine liposomal"
 ## and concepts only (no ingredient) from "depocyte" and "cytarabine liposomal"
 
-both <- c(list(cytarabine_liposomal_depocyte = 
+both <- c(list(cytarabine_liposomal = 
                                         as.numeric(readLines(here::here("drug_vectors", "Athena_searches_depocyte_cytarabine_liposomal_ids.txt")))), 
                    getDrugIngredientCodes(
                                         cdm,
@@ -94,7 +94,7 @@ both <- c(list(cytarabine_liposomal_depocyte =
                                         )
 )
 
-concept_drugs[["cytarabine_liposomal_depocyte"]] <- purrr::list_c(both)
+concept_drugs[["cytarabine_liposomal"]] <- purrr::list_c(both)
 
 
 ## cytarabine, any of the three ingredients "cytarabine", "Cytarabine liposomal", "CYTARABINE 5'-PHOSPHATE"
