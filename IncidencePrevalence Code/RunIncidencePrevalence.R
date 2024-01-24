@@ -47,7 +47,7 @@ cdm <- generateDrugUtilisationCohortSet(
   cdm = cdm,
   name = "drug_cohorts",
   conceptSet = concept_drugs,
-  cohortDateRange = as.Date(c('2010-01-01','2024-12-31')),
+  cohortDateRange = as.Date(c("2010-01-01",NA)),
   limit = "all"
 )
 
@@ -56,7 +56,7 @@ info(logger, "GENERATE DENOMINATOR COHORT")
 cdm <- generateDenominatorCohortSet(
   cdm = cdm, 
   name = "denominator",
-  cohortDateRange = as.Date(c("2010-01-01","2024-12-31")),
+  cohortDateRange = as.Date(c("2010-01-01",NA)),
   ageGroup = list(
     c(0, 150),
     c(0, 17),
