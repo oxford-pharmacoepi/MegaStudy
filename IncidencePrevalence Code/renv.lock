@@ -157,6 +157,30 @@
       ],
       "Hash": "c007e644b48f2f3ddfb37284bfb1c7b9"
     },
+    "DrugUtilisation": {
+      "Package": "DrugUtilisation",
+      "Version": "0.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "CDMConnector",
+        "DBI",
+        "PatientProfiles",
+        "R",
+        "RJSONIO",
+        "checkmate",
+        "cli",
+        "dbplyr",
+        "dplyr",
+        "glue",
+        "lubridate",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "tidyr"
+      ],
+      "Hash": "9267c624ab2db6fb5c7709eafdf9d7b6"
+    },
     "IncidencePrevalence": {
       "Package": "IncidencePrevalence",
       "Version": "0.6.0",

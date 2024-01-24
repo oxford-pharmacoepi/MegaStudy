@@ -20,6 +20,7 @@ library("tidyr")
 library("ggplot2")
 library("Capr")
 library("testthat")
+library("DrugUtilisation")
 
 # Connect to database
 # please see examples to connect here:

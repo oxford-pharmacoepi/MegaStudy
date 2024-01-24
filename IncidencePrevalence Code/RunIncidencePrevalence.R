@@ -81,7 +81,7 @@ inc <- estimateIncidence(
   interval = "years",
   completeDatabaseIntervals = FALSE,
   outcomeWashout = 365,
-  repeatedEvents = FALSE,
+  repeatedEvents = TRUE,
   minCellCount = 10,
   temporary = TRUE
 )
