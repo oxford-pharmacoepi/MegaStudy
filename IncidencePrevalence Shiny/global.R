@@ -85,7 +85,6 @@ for(i in seq_along(incidence_files)){
   incidence[[i]]<-readr::read_csv(incidence_files[[i]], 
                                   show_col_types = FALSE)
 }
-incidence <- dplyr::bind_rows(incidence) 
 incidence <- dplyr::bind_rows(incidence) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
                                                   "General population",

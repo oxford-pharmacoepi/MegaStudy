@@ -266,8 +266,8 @@ ui <- dashboardPage(
           pickerInput(
             inputId = "incidence_estimates_incidence_start_date",
             label = "Incidence start date",
-            choices = as.character(unique(incidence$incidence_start_date)),
-            selected = as.character(unique(incidence$incidence_start_date)),
+            choices = as.character(unique(incidence$incidence_start_date), format = "%Y-%m-%d"),
+            selected = as.character(unique(incidence$incidence_start_date), format = "%Y-%m-%d"),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
@@ -478,8 +478,8 @@ ui <- dashboardPage(
           pickerInput(
             inputId = "prevalence_estimates_prevalence_start_date",
             label = "Prevalence start date",
-            choices = as.character(unique(prevalence$prevalence_start_date)),
-            selected = as.character(unique(prevalence$prevalence_start_date)),
+            choices = as.character(unique(incidence$incidence_start_date), format = "%Y-%m-%d"),
+            selected = as.character(unique(incidence$incidence_start_date), format = "%Y-%m-%d"),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )

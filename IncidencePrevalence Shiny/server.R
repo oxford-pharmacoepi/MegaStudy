@@ -81,164 +81,18 @@ server <- function(input, output, session) {
       filter(denominator_age_group %in% input$incidence_estimates_denominator_age_group) %>%
       filter(denominator_sex %in% input$incidence_estimates_denominator_sex) %>%
       filter(denominator_days_prior_observation %in% input$incidence_estimates_denominator_days_prior_observation) %>%
-      # filter(denominator_start_date %in% input$incidence_estimates_denominator_start_date) %>%
-      # filter(denominator_end_date %in% input$incidence_estimates_denominator_end_date) %>%
       filter(analysis_outcome_washout %in% input$incidence_estimates_analysis_outcome_washout) %>%
       filter(analysis_repeated_events %in% input$incidence_estimates_analysis_repeated_events) %>%
       filter(analysis_complete_database_intervals %in% input$incidence_estimates_analysis_complete_database_intervals) %>%
-      # filter(analysis_min_cell_count %in% input$incidence_estimates_analysis_min_cell_count) %>%
       filter(analysis_interval %in% input$incidence_estimates_analysis_interval) %>%
-      # filter(incidence_start_date %in% input$incidence_estimates_incidence_start_date) %>%
+      filter(incidence_start_date %in% as.Date(input$incidence_estimates_incidence_start_date)) %>%
       mutate(
         person_years = round(suppressWarnings(as.numeric(person_years))),
         person_days = round(suppressWarnings(as.numeric(person_days))),
         n_events = round(suppressWarnings(as.numeric(n_events))),
         incidence_100000_pys = round(suppressWarnings(as.numeric(incidence_100000_pys))),
         incidence_100000_pys_95CI_lower = round(suppressWarnings(as.numeric(incidence_100000_pys_95CI_lower))),
-        incidence_100000_pys_95CI_upper = round(suppressWarnings(as.numeric(incidence_100000_pys_95CI_upper))),
-        outcome_cohort_name = factor(
-          outcome_cohort_name, 
-          levels = c("tenecteplase",
-                     "alteplase",
-                     "sarilumab",
-                     "verteporfin",
-                     "tocilizumab",
-                     "varenicline",
-                     
-                     "C1 esterase inhibitor",
-                     
-                     "belatacept",
-                     "ganirelix",
-                     "tigecycline",
-                     "imiglucerase",
-                     "agalsidase beta",
-                     "azithromycin",
-                     
-                     "ceftriaxone",
-                     "cefotaxime",
-                     
-                     "cefuroxime",
-                     
-                     "urokinase",
-                     "abatacept",
-                     "tofacitinib",
-                     "baricitinib",
-                     "upadacitinib",
-                     "etanercept",
-                     "infliximab",
-                     
-                     "golimumab",
-                     "anakinra",
-                     "ranibizumab",
-                     "bevacizumab",
-                     
-                     "icatibant",
-                     "ecallantide",
-                     "Conestat alfa",
-                     "lanadelumab",
-                     "berotralstat",
-                     
-                     "idarubicin",
-                     
-                     "mycophenolic acid",
-                     "sirolimus",
-                     
-                     "cetrorelix",
-                     "velaglucerase alfa",
-                     "taliglucerase alfa",
-                     "Agalsidase alfa",
-                     
-                     "certolizumab_both",
-                     "clarithromycin_no_combination",
-                     "penicillin_V_no_combination",
-                     "penicillin_G_no_combination",
-                     "amoxicillin_no_combination",
-                     "meropenem_no_combination",
-                     "streptokinase_no_combination",
-                     "arsenic_trioxide",
-                     "cytarabine_liposomal_depocyte",
-                     "cytarabine_any",
-                     "daunorubicin_no_combination",
-                     "cytarabine_daunorubicin_combination",
-                     "amoxicillin_clavulanate_combination",
-                     "ceftozolane_tazobactam",
-                     "piperacillin_tazobactam",
-                     "nicotine_no_combination",
-                     "tretinoin_oral",
-                     "cyclosporine_no_combination",
-                     "tacrolimus_no_topical"),
-          
-          labels = c("tenecteplase",
-                     "alteplase",
-                     "sarilumab",
-                     "verteporfin",
-                     "tocilizumab",
-                     "varenicline",
-                     
-                     "C1 esterase inhibitor",
-                     
-                     "belatacept",
-                     "ganirelix",
-                     "tigecycline",
-                     "imiglucerase",
-                     "agalsidase beta",
-                     "azithromycin",
-                     
-                     "ceftriaxone",
-                     "cefotaxime",
-                     
-                     "cefuroxime",
-                     
-                     "urokinase",
-                     "abatacept",
-                     "tofacitinib",
-                     "baricitinib",
-                     "upadacitinib",
-                     "etanercept",
-                     "infliximab",
-                     
-                     "golimumab",
-                     "anakinra",
-                     "ranibizumab",
-                     "bevacizumab",
-                     
-                     "icatibant",
-                     "ecallantide",
-                     "conestat alfa",
-                     "lanadelumab",
-                     "berotralstat",
-                     
-                     "idarubicin",
-                     
-                     "mycophenolic acid",
-                     "sirolimus",
-                     
-                     "cetrorelix",
-                     "velaglucerase alfa",
-                     "taliglucerase alfa",
-                     "agalsidase alfa",
-                     
-                     "certolizumab",
-                     "clarithromycin",
-                     "penicillin V",
-                     "penicillin G",
-                     "amoxicillin",
-                     "meropenem",
-                     "streptokinase",
-                     "arsenic trioxide",
-                     "liposomal cytarabine",
-                     "any cytarabine",
-                     "daunorubicin",
-                     "cytarabine and daunorubicin",
-                     "amoxicillin and clavulanate",
-                     "ceftozolane and tazobactam",
-                     "piperacillin and tazobactam",
-                     "nicotine",
-                     "tretinoin systemic",
-                     "cyclosporine",
-                     "tacrolimus systemic")
-        )
-      )
+        incidence_100000_pys_95CI_upper = round(suppressWarnings(as.numeric(incidence_100000_pys_95CI_upper))))
   })
   ### download table ----
   output$incidence_estimates_download_table <- downloadHandler(
@@ -313,165 +167,17 @@ server <- function(input, output, session) {
       filter(denominator_age_group %in% input$prevalence_estimates_denominator_age_group) %>%
       filter(denominator_sex %in% input$prevalence_estimates_denominator_sex) %>%
       filter(denominator_days_prior_observation %in% input$prevalence_estimates_denominator_days_prior_observation) %>%
-      # filter(denominator_start_date %in% input$prevalence_estimates_denominator_start_date) %>%
-      # filter(denominator_end_date %in% input$prevalence_estimates_denominator_end_date) %>%
       filter(analysis_type %in% input$prevalence_estimates_analysis_type) %>%
-      # filter(analysis_outcome_lookback_days %in% input$prevalence_estimates_analysis_outcome_lookback_days) %>%
       filter(analysis_time_point %in% input$prevalence_estimates_analysis_time_point) %>%
       filter(analysis_complete_database_intervals %in% input$prevalence_estimates_analysis_complete_database_intervals) %>%
-      filter(analysis_full_contribution %in% input$prevalence_estimates_analysis_full_contribution) %>%
-      # filter(analysis_min_cell_count %in% input$prevalence_estimates_analysis_min_cell_count) %>%
       filter(analysis_interval %in% input$prevalence_estimates_analysis_interval) %>%
-      # filter(prevalence_start_date %in% input$prevalence_estimates_prevalence_start_date) %>%
+      filter(prevalence_start_date %in% as.Date(input$prevalence_estimates_prevalence_start_date)) %>%
       mutate(
         n_cases = round(suppressWarnings(as.numeric(n_cases))),
         n_population = round(suppressWarnings(as.numeric(n_population))),
         prevalence = round(suppressWarnings(as.numeric(prevalence)), 4),
         prevalence_95CI_lower = round(suppressWarnings(as.numeric(prevalence_95CI_lower)), 4),
-        prevalence_95CI_upper = round(suppressWarnings(as.numeric(prevalence_95CI_upper)), 4),
-        outcome_cohort_name = factor(
-          outcome_cohort_name, 
-          levels = c("tenecteplase",
-                     "alteplase",
-                     "sarilumab",
-                     "verteporfin",
-                     "tocilizumab",
-                     "varenicline",
-                     
-                     "C1 esterase inhibitor",
-                     
-                     "belatacept",
-                     "ganirelix",
-                     "tigecycline",
-                     "imiglucerase",
-                     "agalsidase beta",
-                     "azithromycin",
-                     
-                     "ceftriaxone",
-                     "cefotaxime",
-                     
-                     "cefuroxime",
-                     
-                     "urokinase",
-                     "abatacept",
-                     "tofacitinib",
-                     "baricitinib",
-                     "upadacitinib",
-                     "etanercept",
-                     "infliximab",
-                     
-                     "golimumab",
-                     "anakinra",
-                     "ranibizumab",
-                     "bevacizumab",
-                     
-                     "icatibant",
-                     "ecallantide",
-                     "Conestat alfa",
-                     "lanadelumab",
-                     "berotralstat",
-                     
-                     "idarubicin",
-                     
-                     "mycophenolic acid",
-                     "sirolimus",
-                     
-                     "cetrorelix",
-                     "velaglucerase alfa",
-                     "taliglucerase alfa",
-                     "Agalsidase alfa",
-                     
-                     "certolizumab_both",
-                     "clarithromycin_no_combination",
-                     "penicillin_V_no_combination",
-                     "penicillin_G_no_combination",
-                     "amoxicillin_no_combination",
-                     "meropenem_no_combination",
-                     "streptokinase_no_combination",
-                     "arsenic_trioxide",
-                     "cytarabine_liposomal_depocyte",
-                     "cytarabine_any",
-                     "daunorubicin_no_combination",
-                     "cytarabine_daunorubicin_combination",
-                     "amoxicillin_clavulanate_combination",
-                     "ceftozolane_tazobactam",
-                     "piperacillin_tazobactam",
-                     "nicotine_no_combination",
-                     "tretinoin_oral",
-                     "cyclosporine_no_combination",
-                     "tacrolimus_no_topical"),
-          
-          labels = c("tenecteplase",
-                     "alteplase",
-                     "sarilumab",
-                     "verteporfin",
-                     "tocilizumab",
-                     "varenicline",
-                     
-                     "C1 esterase inhibitor",
-                     
-                     "belatacept",
-                     "ganirelix",
-                     "tigecycline",
-                     "imiglucerase",
-                     "agalsidase beta",
-                     "azithromycin",
-                     
-                     "ceftriaxone",
-                     "cefotaxime",
-                     
-                     "cefuroxime",
-                     
-                     "urokinase",
-                     "abatacept",
-                     "tofacitinib",
-                     "baricitinib",
-                     "upadacitinib",
-                     "etanercept",
-                     "infliximab",
-                     
-                     "golimumab",
-                     "anakinra",
-                     "ranibizumab",
-                     "bevacizumab",
-                     
-                     "icatibant",
-                     "ecallantide",
-                     "conestat alfa",
-                     "lanadelumab",
-                     "berotralstat",
-                     
-                     "idarubicin",
-                     
-                     "mycophenolic acid",
-                     "sirolimus",
-                     
-                     "cetrorelix",
-                     "velaglucerase alfa",
-                     "taliglucerase alfa",
-                     "agalsidase alfa",
-                     
-                     "certolizumab",
-                     "clarithromycin",
-                     "penicillin V",
-                     "penicillin G",
-                     "amoxicillin",
-                     "meropenem",
-                     "streptokinase",
-                     "arsenic trioxide",
-                     "liposomal cytarabine",
-                     "any cytarabine",
-                     "daunorubicin",
-                     "cytarabine and daunorubicin",
-                     "amoxicillin and clavulanate",
-                     "ceftozolane and tazobactam",
-                     "piperacillin and tazobactam",
-                     "nicotine",
-                     "tretinoin systemic",
-                     "cyclosporine",
-                     "tacrolimus systemic")
-        )
-      )
+        prevalence_95CI_upper = round(suppressWarnings(as.numeric(prevalence_95CI_upper)), 4))
   })
   ### download table ----
   output$prevalence_estimates_download_table <- downloadHandler(
