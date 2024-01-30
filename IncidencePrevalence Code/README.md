@@ -7,7 +7,8 @@ Please clone the entire repository into your R environment or pull the update in
 You only need to interact with the file CodeToRun.R
 Please fill in all the necessary information according to your situation. 
 
-IMPORTANT INFORMATION: The renv will use the current developer version of CDMConnector (not the CRAN version)
+If you have different drug_type_concept_id in your data (https://ohdsi.github.io/CommonDataModel/cdm54.html#DRUG_EXPOSURE) you can amend the code in 
+
 
 ## Issues
 
@@ -19,8 +20,7 @@ The package CDM Connector does not support the database management system BIG QU
 It does support SQLServer, postgresql, redshift, snowflake, oracle, and spark. 
 If you have another database management system we will find out how it goes. Please report this as an issue in github.
 
-## There is no shiny available yet
-Please let us know if you need a shiny to check your results before returning them to us.
+## There is a shiny available to check your results
 
 ## Returning results
 
