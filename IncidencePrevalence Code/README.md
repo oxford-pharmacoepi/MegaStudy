@@ -6,8 +6,7 @@ Please clone the entire repository into your R environment or pull the update in
 
 You only need to interact with the file CodeToRun.R
 Please fill in all the necessary information according to your situation. 
-
-If you have different drug_type_concept_id in your data (https://ohdsi.github.io/CommonDataModel/cdm54.html#DRUG_EXPOSURE) you can amend the code in 
+However, if you have different drug_type_concept_id in your data (https://ohdsi.github.io/CommonDataModel/cdm54.html#DRUG_EXPOSURE) you can amend the code in line 35 - 40 in RunIncidencePrevalence.R to filter for your CDM Name and drug type you wish to use.
 
 
 ## Issues
@@ -16,7 +15,7 @@ If you encounter any errors or if you have questions, please report them as an i
 Other people may have the same questions, and thereby we can answer them for all. 
 
 ### Of Note
-The package CDM Connector does not support the database management system BIG QUERY, Azure Synapse, i.e. it may not be possible for you to contribute results to the MegaStudy. 
+The package CDM Connector does not support the database management system BIG QUERY, i.e. it may not be possible for you to contribute results to the MegaStudy. 
 It does support SQLServer, postgresql, redshift, snowflake, oracle, and spark. 
 If you have another database management system we will find out how it goes. Please report this as an issue in github.
 
