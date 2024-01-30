@@ -248,7 +248,7 @@ ui <- dashboardPage(
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
-        ),
+        ),        
         p("Dates"),
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
@@ -318,7 +318,7 @@ ui <- dashboardPage(
             plotlyOutput(
               "incidence_estimates_plot",
               height = "1000px",
-              width = "1150px"
+              width = "1550px"
             ) %>%
               withSpinner(),
             h4("Download figure"),

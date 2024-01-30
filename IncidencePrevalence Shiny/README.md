@@ -1,9 +1,10 @@
 
 # IncidencePrevalence Shiny
 
-This step is optional if you want to look at your results before sending
-them back to us. This code contains a shiny to view your results from
-the IncidencePrevalence Code
+This code contains a shiny to view your results from the
+IncidencePrevalence Code. This step is for you want to look at your
+results before sending them back to us and to double check whether the
+results make sense.
 
 ## Instructions
 
@@ -20,7 +21,7 @@ renv::restore()
 ```
 
 Please create a “data” folder on the same level as the .Rproj and put
-the following three csv files into it (or multiples if you have several
+the following five csv files into it (or multiples if you have several
 databases): “snapshot\_”dbName”.csv, “dbName”\_Incidence.csv,
 “dbName”\_Prevalence.csv, “incidence_attrition_dbName”.csv, and
 “prevalence_attrition_dbName”.csv. You can also put folders into the
