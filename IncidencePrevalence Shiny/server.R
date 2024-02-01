@@ -50,8 +50,8 @@ server <- function(input, output, session) {
   getPrevAtt <- reactive({
     
     prevalence_attrition %>% 
-      filter(cdm_name %in% input$incidence_attrition_cdm_name,
-             outcome_cohort_name %in% input$incidence_attrition_outcome_cohort_name) %>%
+      filter(cdm_name %in% input$prevalence_attrition_cdm_name,
+             outcome_cohort_name %in% input$prevalence_attrition_outcome_cohort_name) %>%
       pivot_wider(names_from = cdm_name, values_from = number_subjects) 
     
   })
