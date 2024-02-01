@@ -85,7 +85,7 @@ concept_drugs[["certolizumab"]] <- purrr::list_c(certolizumab)
 
 cytarabine_liposomal <- list(as.numeric(readLines(here::here("drug_vectors", "Athena_searches_depocyte_cytarabine_liposomal_ids.txt")))) 
 
-## does not have descendants, added ingredient concept id do the txt file above
+## does not have descendants, ignore this statement
                   # getDrugIngredientCodes(
                   #                       cdm,
                   #                       name = "Cytarabine liposomal",
