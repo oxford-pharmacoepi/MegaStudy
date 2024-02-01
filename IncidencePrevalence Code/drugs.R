@@ -83,9 +83,8 @@ concept_drugs[["certolizumab"]] <- purrr::list_c(certolizumab)
 ## ingredient 902730 "Cytarabine liposomal"
 ## and concepts only (no ingredient) from "depocyte" and "cytarabine liposomal"
 
-both <- c(list(cytarabine_liposomal = 
-                                        as.numeric(readLines(here::here("drug_vectors", "Athena_searches_depocyte_cytarabine_liposomal_ids.txt")))), 
-                   getDrugIngredientCodes(
+both <- append(list(as.numeric(readLines(here::here("drug_vectors", "Athena_searches_depocyte_cytarabine_liposomal_ids.txt")))), 
+                  getDrugIngredientCodes(
                                         cdm,
                                         name = "Cytarabine liposomal",
                                         doseForm = NULL,
