@@ -83,17 +83,19 @@ concept_drugs[["certolizumab"]] <- purrr::list_c(certolizumab)
 ## ingredient 902730 "Cytarabine liposomal"
 ## and concepts only (no ingredient) from "depocyte" and "cytarabine liposomal"
 
-both <- append(list(as.numeric(readLines(here::here("drug_vectors", "Athena_searches_depocyte_cytarabine_liposomal_ids.txt")))), 
-                  getDrugIngredientCodes(
-                                        cdm,
-                                        name = "Cytarabine liposomal",
-                                        doseForm = NULL,
-                                        ingredientRange = c(1, 1),
-                                        withConceptDetails = FALSE
-                                        )
-)
+cytarabine_liposomal <- list(as.numeric(readLines(here::here("drug_vectors", "Athena_searches_depocyte_cytarabine_liposomal_ids.txt")))) 
 
-concept_drugs[["cytarabine_liposomal"]] <- purrr::list_c(both)
+## does not have descendants, added ingredient concept id do the txt file above
+                  # getDrugIngredientCodes(
+                  #                       cdm,
+                  #                       name = "Cytarabine liposomal",
+                  #                       doseForm = NULL,
+                  #                       ingredientRange = c(1, 1),
+                  #                       withConceptDetails = FALSE
+                  #                       )
+
+
+concept_drugs[["cytarabine_liposomal"]] <- purrr::list_c(cytarabine_liposomal)
 
 
 ## cytarabine, any of the three ingredients "cytarabine", "Cytarabine liposomal", "CYTARABINE 5'-PHOSPHATE"
