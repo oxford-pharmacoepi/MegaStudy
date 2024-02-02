@@ -146,3 +146,4 @@ piperacillin_tazobactam <-  list(as.numeric(readLines(here::here("drug_vectors",
 concept_drugs[["piperacillin_tazobactam"]] <- purrr::list_c(piperacillin_tazobactam)
 
 
+concept_drugs <- lapply(concept_drugs, function(x) as.numeric(x))

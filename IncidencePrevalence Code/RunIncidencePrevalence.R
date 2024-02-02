@@ -43,6 +43,8 @@ if (cdmName(cdm) == "SIDIAP") {
 info(logger, "GENERATE DRUG CONCEPTS")
 source(here("drugs.R"))
 
+## Generate drug cohorts---
+info(logger, "GENERATE DRUG COHORTS")
 cdm <- generateDrugUtilisationCohortSet(
   cdm = cdm,
   name = "drug_cohorts",
