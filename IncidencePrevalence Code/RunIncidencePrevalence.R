@@ -49,6 +49,11 @@ cdm <- generateDrugUtilisationCohortSet(
   cdm = cdm,
   name = "drug_cohorts",
   conceptSet = concept_drugs,
+  durationRange = c(1, Inf),
+  imputeDuration = "none",
+  gapEra = 0,
+  priorUseWashout = 0,
+  priorObservation = 0,
   cohortDateRange = as.Date(c("2010-01-01",NA)),
   limit = "all"
 )
@@ -66,7 +71,7 @@ cdm <- generateDenominatorCohortSet(
     c(65, 150)
   ),
   sex = c("Both", "Female", "Male"),
-  daysPriorObservation = 0,
+  daysPriorObservation = c(0,30),   # 30 for incidence, 0 for prevalence
   requirementInteractions = FALSE,
   overwrite = TRUE
 )
@@ -82,7 +87,7 @@ inc <- estimateIncidence(
   outcomeTable = "drug_cohorts",
   interval = "years",
   completeDatabaseIntervals = FALSE,
-  outcomeWashout = 365,
+  outcomeWashout = 30,
   repeatedEvents = TRUE,
   minCellCount = 10,
   temporary = TRUE
