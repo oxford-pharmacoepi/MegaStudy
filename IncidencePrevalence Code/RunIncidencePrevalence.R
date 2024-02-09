@@ -78,8 +78,6 @@ cdm <- generateDenominatorCohortSet(
 
 
 ## get incidence rates ---
-## since the aim is to estimate incidence proportions, I will need a 365 day washout to make sure people only contribute once
-## protocol says: repetitive events allowed (aka during study period, but not within interval) with 30 day washout period
 info(logger, "ESTIMATE INCIDENCE RATES")
 inc <- estimateIncidence(
   cdm = cdm,
