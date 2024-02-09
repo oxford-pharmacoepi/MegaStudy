@@ -21,12 +21,11 @@ renv::restore()
 ```
 
 Please create a “data” folder on the same level as the .Rproj and put
-the following five csv files into it (or multiples if you have several
-databases): “snapshot\_”dbName”.csv, “dbName”\_Incidence.csv,
-“dbName”\_Prevalence.csv, “incidence_attrition_dbName”.csv, and
-“prevalence_attrition_dbName”.csv. You can also put folders into the
-“data” folder with the csv’s therein, the code will look for the files
-also in sub-directories, but not zip files.
+everything from your “storage” folder from the “IncidencePrevalence
+Code” into it : “snapshot\_”dbName”.csv,
+“dbName”\_IncidencePrevalenceResults.zip,
+“incidence_attrition_dbName”.csv, and “prevalence_attrition_dbName”.csv
+(or multiples of them if you have several databases)
 
 Then open global.R and click “Run App” in the top right corner.
 

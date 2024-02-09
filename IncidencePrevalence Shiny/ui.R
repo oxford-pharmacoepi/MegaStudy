@@ -170,6 +170,17 @@ ui <- dashboardPage(
             multiple = TRUE
           )
         ),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "incidence_estimates_group",
+            label = "Group",
+            choices = sort(unique(incidence$group)),
+            selected = unique(incidence$group),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
         p("Denominator population settings"),
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
@@ -298,7 +309,7 @@ ui <- dashboardPage(
               pickerInput(
                 inputId = "incidence_estimates_plot_facet",
                 label = "Facet by",
-                choices = c("cdm_name", "outcome_cohort_name", "denominator_target_cohort_name", "denominator_age_group", "denominator_sex", "denominator_days_prior_observation", "denominator_start_date", "denominator_end_date", "analysis_outcome_washout", "analysis_repeated_events", "analysis_complete_database_intervals", "analysis_min_cell_count", "analysis_interval", "incidence_start_date"),
+                choices = c("group","cdm_name", "outcome_cohort_name", "denominator_target_cohort_name", "denominator_age_group", "denominator_sex", "denominator_days_prior_observation", "denominator_start_date", "denominator_end_date", "analysis_outcome_washout", "analysis_repeated_events", "analysis_complete_database_intervals", "analysis_min_cell_count", "analysis_interval", "incidence_start_date"),
                 selected = c("outcome_cohort_name"),
                 list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
                 multiple = TRUE
@@ -367,6 +378,17 @@ ui <- dashboardPage(
             label = "Outcome name",
             choices = sort(unique(prevalence$outcome_cohort_name)),
             selected = unique(prevalence$outcome_cohort_name),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "prevalence_estimates_group",
+            label = "Group",
+            choices = sort(unique(prevalence$group)),
+            selected = unique(prevalence$group),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
@@ -513,7 +535,7 @@ ui <- dashboardPage(
               pickerInput(
                 inputId = "prevalence_estimates_plot_facet",
                 label = "Facet by",
-                choices = c("cdm_name", "outcome_cohort_name", "denominator_target_cohort_name", "denominator_age_group", "denominator_sex", "denominator_days_prior_observation", "denominator_start_date", "denominator_end_date", "analysis_type", "analysis_time_point", "analysis_complete_database_intervals", "analysis_full_contribution", "analysis_min_cell_count", "analysis_interval", "prevalence_start_date"),
+                choices = c("group","cdm_name", "outcome_cohort_name", "denominator_target_cohort_name", "denominator_age_group", "denominator_sex", "denominator_days_prior_observation", "denominator_start_date", "denominator_end_date", "analysis_type", "analysis_time_point", "analysis_complete_database_intervals", "analysis_full_contribution", "analysis_min_cell_count", "analysis_interval", "prevalence_start_date"),
                 selected = "outcome_cohort_name",
                 list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
                 multiple = TRUE

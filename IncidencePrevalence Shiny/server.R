@@ -79,6 +79,7 @@ server <- function(input, output, session) {
     incidence %>%   
       filter(cdm_name %in% input$incidence_estimates_cdm_name) %>%
       filter(outcome_cohort_name %in% input$incidence_estimates_outcome_cohort_name) %>%
+      filter(group %in% input$incidence_estimates_group) %>%
       filter(denominator_target_cohort_name %in% input$incidence_estimates_denominator_target_cohort_name) %>%
       filter(denominator_age_group %in% input$incidence_estimates_denominator_age_group) %>%
       filter(denominator_sex %in% input$incidence_estimates_denominator_sex) %>%
@@ -89,12 +90,12 @@ server <- function(input, output, session) {
       filter(analysis_interval %in% input$incidence_estimates_analysis_interval) %>%
       filter(incidence_start_date %in% as.Date(input$incidence_estimates_incidence_start_date)) %>%
       mutate(
-        n_persons = round(suppressWarnings(as.numeric(n_persons))),
+        person_years = round(suppressWarnings(as.numeric(person_years))),
         n_events = round(suppressWarnings(as.numeric(n_events))),
-        incidence_proportion = round(suppressWarnings(as.numeric(incidence_proportion)),3),
-        incidence_proportion_95CI_lower = round(suppressWarnings(as.numeric(incidence_proportion_95CI_lower)),3),
-        incidence_proportion_95CI_upper = round(suppressWarnings(as.numeric(incidence_proportion_95CI_upper)),3)
-        ) %>% select(-"incidence_100000_pys")
+        incidence_100000_pys = round(suppressWarnings(as.numeric(incidence_100000_pys)),3),
+        incidence_100000_pys_95CI_lower = round(suppressWarnings(as.numeric(incidence_100000_pys_95CI_lower)),3),
+        incidence_100000_pys_95CI_upper = round(suppressWarnings(as.numeric(incidence_100000_pys_95CI_upper)),3)
+        ) 
   })
   ### download table ----
   output$incidence_estimates_download_table <- downloadHandler(
@@ -110,11 +111,11 @@ server <- function(input, output, session) {
     table <- getincidence()
     validate(need(nrow(table) > 0, "No results for selected inputs"))
     table <- table %>%
-      mutate(incidence_proportion = paste0(
-        incidence_proportion, " (", incidence_proportion_95CI_lower, " to ",
-        incidence_proportion_95CI_upper, " )"
+      mutate(incidence_100000_pys = paste0(
+        incidence_100000_pys, " (", incidence_100000_pys_95CI_lower, " to ",
+        incidence_100000_pys_95CI_upper, " )"
       )) %>%
-      select(cdm_name, outcome_cohort_name, denominator_target_cohort_name, denominator_age_group, denominator_sex, denominator_days_prior_observation, denominator_start_date, denominator_end_date, analysis_outcome_washout, analysis_repeated_events, analysis_complete_database_intervals, analysis_min_cell_count, analysis_interval, incidence_start_date, n_events, n_persons, incidence_proportion)
+      select(cdm_name, outcome_cohort_name, denominator_target_cohort_name, denominator_age_group, denominator_sex, denominator_days_prior_observation, denominator_start_date, denominator_end_date, analysis_outcome_washout, analysis_repeated_events, analysis_complete_database_intervals, analysis_min_cell_count, analysis_interval, incidence_start_date, n_events, n_persons, incidence_100000_pys)
     datatable(
       table,
       rownames = FALSE,
@@ -127,7 +128,7 @@ server <- function(input, output, session) {
     table <- getincidence()
     validate(need(nrow(table) > 0, "No results for selected inputs"))
     class(table) <- c("IncidenceResult", "IncidencePrevalenceResult", class(table))
-    plotIncidenceProportion(
+    plotIncidence(
       table,
       x = input$incidence_estimates_plot_x,
       ylim = c(0, NA),
@@ -165,6 +166,7 @@ server <- function(input, output, session) {
       filter(n_cases >0) %>%
       filter(cdm_name %in% input$prevalence_estimates_cdm_name) %>%
       filter(outcome_cohort_name %in% input$prevalence_estimates_outcome_cohort_name) %>%
+      filter(group %in% input$prevalence_estimates_group) %>%
       filter(denominator_target_cohort_name %in% input$prevalence_estimates_denominator_target_cohort_name) %>%
       filter(denominator_age_group %in% input$prevalence_estimates_denominator_age_group) %>%
       filter(denominator_sex %in% input$prevalence_estimates_denominator_sex) %>%
