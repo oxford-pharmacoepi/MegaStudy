@@ -20,9 +20,11 @@ renv::activate()
 renv::restore()
 ```
 
-Please create a “data” folder on the same level as the .Rproj and put
-everything from your “storage” folder from the “IncidencePrevalence
-Code” into it : “snapshot\_”dbName”.csv,
+Please create a “data” folder on the same level as the .Rproj into which
+you shall everything from your “storage” folder from the
+“IncidencePrevalence Code” or from the zip file “Results_dbName.zip”
+(unzipped, they are equivalent). In the end, your “data” folder should
+contain “snapshot\_”dbName”.csv,
 “dbName”\_IncidencePrevalenceResults.zip,
 “incidence_attrition_dbName”.csv, and “prevalence_attrition_dbName”.csv
 (or multiples of them if you have several databases)
