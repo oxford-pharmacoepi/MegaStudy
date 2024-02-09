@@ -72,7 +72,7 @@ cdm <- generateDenominatorCohortSet(
   ),
   sex = c("Both", "Female", "Male"),
   daysPriorObservation = c(0,30),   # 30 for incidence, 0 for prevalence
-  requirementInteractions = FALSE,
+  requirementInteractions = TRUE,
   overwrite = TRUE
 )
 
