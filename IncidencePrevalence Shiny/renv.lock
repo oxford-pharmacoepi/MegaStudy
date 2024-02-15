@@ -18,14 +18,9 @@
     },
     "CDMConnector": {
       "Package": "CDMConnector",
-      "Version": "1.2.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "CDMConnector",
-      "RemoteUsername": "darwin-eu",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "b7fda01d9d1c06d7d386bb0db6f50fe6941432db",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
       "Requirements": [
         "DBI",
         "R",
@@ -42,6 +37,7 @@
         "purrr",
         "readr",
         "rlang",
+        "snakecase",
         "stringi",
         "stringr",
         "tidyr",
@@ -49,18 +45,18 @@
         "waldo",
         "withr"
       ],
-      "Hash": "ec7bbd5cc0334647d46077be29a1facf"
+      "Hash": "f55f3d711ea6683bfbb51fddb8e2bdd6"
     },
     "DBI": {
       "Package": "DBI",
-      "Version": "1.1.3",
+      "Version": "1.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "b2866e62bab9378c3cc9476a1954226b"
+      "Hash": "9b4993e98e0e19da84c168460c032fef"
     },
     "DT": {
       "Package": "DT",
@@ -81,9 +77,9 @@
     },
     "IncidencePrevalence": {
       "Package": "IncidencePrevalence",
-      "Version": "0.5.3",
+      "Version": "0.6.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "CDMConnector",
         "DBI",
@@ -100,11 +96,12 @@
         "rlang",
         "scales",
         "stringr",
+        "tibble",
         "tidyr",
         "tidyselect",
         "zip"
       ],
-      "Hash": "5a4d39156e454000450e90d5baf99856"
+      "Hash": "a4395382b5a6c791dc99053bc73d8d41"
     },
     "MASS": {
       "Package": "MASS",
@@ -657,14 +654,14 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.6.2",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e"
+      "Hash": "e0b3a53876554bd45879e596cdb10a52"
     },
     "gt": {
       "Package": "gt",
@@ -1280,14 +1277,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.2",
+      "Version": "1.1.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "50a6dbdc522936ca35afc5e2082ea91b"
+      "Hash": "42548638fae05fd9a9b5f3f437fbbbe2"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
@@ -1475,6 +1472,18 @@
       ],
       "Hash": "e418b532e9bb4eb22a714b9a9f1acee7"
     },
+    "snakecase": {
+      "Package": "snakecase",
+      "Version": "0.11.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "stringi",
+        "stringr"
+      ],
+      "Hash": "58767e44739b76965332e8a4fe3f91f1"
+    },
     "sourcetools": {
       "Package": "sourcetools",
       "Version": "0.1.7-1",
@@ -1566,7 +1575,7 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.3.0",
+      "Version": "1.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1585,7 +1594,7 @@
         "utils",
         "vctrs"
       ],
-      "Hash": "e47debdc7ce599b070c8e78e8ac0cfcf"
+      "Hash": "915fb7ce036c22a6a33b5a8adb712eb1"
     },
     "tidyselect": {
       "Package": "tidyselect",
@@ -1728,16 +1737,15 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "2.5.2",
+      "Version": "3.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "grDevices",
-        "graphics",
-        "stats"
+        "graphics"
       ],
-      "Hash": "4b25e70111b7d644322e9513f403a272"
+      "Hash": "d31b6c62c10dcf11ec530ca6b0dd5d35"
     },
     "xfun": {
       "Package": "xfun",
