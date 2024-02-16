@@ -131,6 +131,10 @@ zip(
   root = outputFolder
 )
 
+## zip everything together ---
+info(logger, "REMOVE STORAGE FOLDER")
+unlink(here("storage"), recursive = TRUE)
+
 print("Done!")
 print("If all has worked, there should now be a zip file with your Incidence Prevalence results in the output folder to share")
 print("Thank you for running the Incidence Prevalence analysis!")
