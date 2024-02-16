@@ -20,13 +20,15 @@ renv::activate()
 renv::restore()
 ```
 
+
 Please create a “data” folder on the same level as the .Rproj into which
-you upload your zip file: Results_“dbName”.zip. RStudio automatically
+you upload your zip file: Results\_“dbName”.zip. RStudio automatically
 unzips the files ending up in the “data” folder. Please double check. In
-the end, your “data” folder should contain: snapshot_“dbName”.csv,
-“dbName"_IncidencePrevalenceResults.zip (yes, still a zip that is good,
-there was a zip in the sip ;-)), incidence_attrition_"dbName”.csv, and
-prevalence_attrition_“dbName”.csv. If you have several databases, you
+the end, your “data” folder should contain: snapshot\_“dbName”.csv,
+“dbName_IncidencePrevalenceResults.zip (yes, still a zip, that is good,
+there was a zip in the zip and it will be taken care of in the shiny
+code ;-)), incidence_attrition_dbName”.csv, and
+prevalence_attrition\_“dbName”.csv. If you have several databases, you
 will have several copies of those files each with a different “dbName”.
 
 Then open global.R and click “Run App” in the top right corner.
