@@ -24,8 +24,8 @@ Please create a “data” folder on the same level as the .Rproj into which
 you upload your zip file: Results_“dbName”.zip. RStudio automatically
 unzips the files ending up in the “data” folder. Please double check. In
 the end, your “data” folder should contain: snapshot_“dbName”.csv,
-“dbName_IncidencePrevalenceResults.zip (yes, still a zip that is good,
-there was a zip in the sip ;-)), incidence_attrition_dbName”.csv, and
+“dbName"_IncidencePrevalenceResults.zip (yes, still a zip that is good,
+there was a zip in the sip ;-)), incidence_attrition_"dbName”.csv, and
 prevalence_attrition_“dbName”.csv. If you have several databases, you
 will have several copies of those files each with a different “dbName”.
 
