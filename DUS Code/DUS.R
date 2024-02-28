@@ -651,10 +651,10 @@ prev_lsc <- cdm[["prev_pat"]]  %>%
     indexDate = "outcome_start_date",
     censorDate = NULL,
     minimumFrequency = 0.01,                      ## it is a proportion: 0.5% threshold
-    excludedCodes = NULL)    %>%                  ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
-  suppress(minCellCount = 5) %>% 
+    excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
+  suppress(minCellCount = 5) %>%  
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
-  inner_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
+  inner_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
   select(-"cohort_definition_id") %>% 
   filter(!is.na(estimate_value), estimate_value != "<5")
 
