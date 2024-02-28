@@ -2,6 +2,10 @@
 
 This repository contains all code and shiny applications for the MegaStudy
 
+## Phase of running Feasibility, and if you have passed, the Incidence Prevalence Code
+
+The DUS code is not ready yet as it is in testing phase. Information will follow in March/April.
+
 ## Issues
 
 If you encounter problems or have questions please open an issue here in github.
