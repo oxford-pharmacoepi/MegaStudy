@@ -328,7 +328,7 @@ ui <- dashboardPage(
             ),
             plotlyOutput(
               "incidence_estimates_plot",
-              height = "1000px",
+              height = "1100px",
               width = "1550px"
             ) %>%
               withSpinner(),
@@ -554,7 +554,7 @@ ui <- dashboardPage(
             ),
             plotlyOutput(
               "prevalence_estimates_plot",
-              height = "1000px",
+              height = "1100px",
               width = "1150px"
             ) %>%
               withSpinner(),
