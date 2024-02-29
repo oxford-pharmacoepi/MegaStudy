@@ -204,7 +204,13 @@ inc_analysis_id <- inc %>%
       mutate(analysis_id = inc_analysis_id$analysis_id) %>%
       inner_join(inc_analysis_id, by = "analysis_id") %>%
       mutate(cohort_definition_id = analysis_id * i) %>%
-      select(-"analysis_id")
+      select(-"analysis_id") %>% 
+    rename(study_end = cohort_end_date ,
+           study_start = cohort_start_date ) %>%
+    inner_join(cdm[["drug_cohorts"]] %>% select(-"cohort_definition_id"), 
+               by = c("subject_id","outcome_start_date" = "cohort_start_date"), copy = TRUE) %>%
+    select(!c("study_start","study_end")) %>%
+    rename(cohort_start_date = outcome_start_date)
     
     inc_pat <- bind_rows(inc_pat, addition)
 
@@ -529,7 +535,13 @@ for (i in seq_along(concept_drugs)){
     mutate(analysis_id = prev_analysis_id$analysis_id) %>%
     inner_join(prev_analysis_id, by = "analysis_id") %>%
     mutate(cohort_definition_id = analysis_id * i) %>%
-    select(-"analysis_id")
+    select(-"analysis_id") %>% 
+    rename(study_end = cohort_end_date ,
+           study_start = cohort_start_date ) %>%
+    inner_join(cdm[["drug_cohorts"]] %>% select(-"cohort_definition_id"), 
+               by = c("subject_id","outcome_start_date" = "cohort_start_date"), copy = TRUE) %>%
+    select(!c("study_start","study_end")) %>%
+    rename(cohort_start_date = outcome_start_date)
   
   prev_pat <- bind_rows(prev_pat, addition)
   
