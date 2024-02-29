@@ -3,6 +3,7 @@
 renv::activate()
 renv::restore()
 
+library("devtools")
 library("odbc")
 library("RPostgres")
 library("DBI")
@@ -14,15 +15,12 @@ library("here")
 library("log4r")
 library("zip")
 library("IncidencePrevalence")
+library("CodelistGenerator")
 library("tidyr")
 library("ggplot2")
-library("CodelistGenerator")
-library("lubridate")
-library("glue")
+library("Capr")
+library("testthat")
 library("DrugUtilisation")
-library("PatientProfiles")
-library("omopgenerics")
-library("stringr")
 
 # Connect to database
 # please see examples to connect here:
