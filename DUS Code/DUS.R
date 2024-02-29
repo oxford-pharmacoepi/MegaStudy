@@ -308,7 +308,7 @@ inc_lsc <- cdm[["inc_pat"]]  %>%
               episodeInWindow = "drug_exposure",            ## looks at start and end date (drug_era are collapsed exposures with standard gaps), not all DP have drug_era filled
               indexDate = "outcome_start_date",
               censorDate = NULL,
-              minimumFrequency = 0.01,                      ## it is a proportion: 0.5% threshold
+              minimumFrequency = 0.05,                      ## it is a proportion: 5% threshold
               excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
   suppress(minCellCount = 5) %>%                
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
@@ -546,28 +546,7 @@ info(logger, "CHARACTERISATION PREVALENT PATIENTS")
 
 cdm <- insertTable(cdm, "prev_pat", prev_pat)
 
-## prevent overlapping cohort start and end dates 
-## make the cohort_end_date the outcome_start_date
-## make the cohort_start_date of the next row outcome_start_date + 1 (but not the first row of each patient/cohort_definition_id combination) ---------------------------------------------------------
-
-# cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]] %>%
-#                                                window_order(subject_id, cohort_definition_id, outcome_start_date) %>%
-#                                                group_by(subject_id, cohort_definition_id) %>%
-#                                                mutate(
-#                                                  new_outcome_end_date = outcome_start_date, 
-#                                                  new_outcome_start_date = ifelse(is.na(lag(outcome_start_date)),cohort_start_date,lag(outcome_start_date)),
-#                                                  row_count = row_number()
-#                                                ) %>%
-#                                                mutate(
-#                                                  new_outcome_start_date = as.Date(ifelse(row_count > 1,  !!dateadd("new_outcome_start_date", 1, interval = "day"),new_outcome_start_date ))
-#                                                ) %>% ungroup() %>%
-#                                                select(-"cohort_start_date",-"cohort_end_date",-"row_count") %>%
-#                                                rename(cohort_start_date = new_outcome_start_date,
-#                                                       cohort_end_date = new_outcome_end_date) %>%
-#                                                window_order(cohort_definition_id, subject_id, outcome_start_date)
-# )
-# 
-
+## overlapping cohort ends not checked
 cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]],.softValidation = TRUE)    
 
 
@@ -652,7 +631,7 @@ prev_lsc <- cdm[["prev_pat"]]  %>%
     episodeInWindow = "drug_exposure",            ## looks at start and end date (drug_era are collapsed exposures with standard gaps), not all DP have drug_era filled
     indexDate = "outcome_start_date",
     censorDate = NULL,
-    minimumFrequency = 0.01,                      ## it is a proportion: 0.5% threshold
+    minimumFrequency = 0.05,                      ## it is a proportion: 5% threshold
     excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
   suppress(minCellCount = 5) %>%  
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
