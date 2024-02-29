@@ -23,6 +23,7 @@ library("DrugUtilisation")
 library("PatientProfiles")
 library("omopgenerics")
 library("stringr")
+library("testthat")
 
 
 # Connect to database
