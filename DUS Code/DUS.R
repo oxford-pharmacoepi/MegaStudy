@@ -285,7 +285,8 @@ for (cov_ind in cov_indication){
    mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
    inner_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
    select(-"cohort_definition_id") %>% 
-   filter(!is.na(estimate_value), estimate_value != "<5")
+   filter(!is.na(estimate_value), estimate_value != "<5",
+          variable_level != "None")
  
   inc_indication_summary <- bind_rows(inc_indication_summary,indication_drug_cohort)
 
@@ -627,7 +628,8 @@ for (cov_ind in cov_indication){
     mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
     inner_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
     select(-"cohort_definition_id") %>% 
-    filter(!is.na(estimate_value), estimate_value != "<5")
+    filter(!is.na(estimate_value), estimate_value != "<5",
+           variable_level != "None")
   
   prev_indication_summary <- bind_rows(prev_indication_summary,indication_drug_cohort)
   
