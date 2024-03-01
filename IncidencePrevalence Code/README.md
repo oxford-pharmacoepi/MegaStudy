@@ -15,9 +15,7 @@ If you encounter any errors or if you have questions, please report them as an i
 Other people may have the same questions, and thereby we can answer them for all. 
 
 ### Of Note
-The package CDM Connector does not support the database management system BIG QUERY, i.e. it may not be possible for you to contribute results to the MegaStudy. 
-It does support SQLServer, postgresql, redshift, snowflake, oracle, and spark. 
-If you have another database management system we will find out how it goes. Please report this as an issue in github.
+The package CDM Connector does not support the database management system BIG QUERY, spark and oracle, i.e. it may not be possible for you to contribute results to the MegaStudy. It does support SQLServer, postgresql, redshift, and snowflake. If you have another database management system we will find out how it goes. Please report this as an issue in github.
 
 ## There is a shiny available to check your results
 
