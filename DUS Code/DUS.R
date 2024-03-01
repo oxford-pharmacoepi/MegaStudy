@@ -700,7 +700,7 @@ write.csv(prev_use_summary, here("storage", paste0(
 ## zip everything together ---
 info(logger, "ZIP EVERYTHING")
 zip(
-  zipfile = here::here(paste0("Results_", cdmName(cdm), ".zip")),
+  zipfile = here::here(paste0("Results_DUS_", cdmName(cdm), ".zip")),
   files = list.files(outputFolder),
   root = outputFolder
 )
