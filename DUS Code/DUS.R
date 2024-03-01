@@ -557,9 +557,7 @@ write.csv(prev_attrition,
 info(logger, "CHARACTERISATION PREVALENT PATIENTS")
 
 cdm <- insertTable(cdm, "prev_pat", prev_pat)
-
-## overlapping cohort ends not checked
-cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]],.softValidation = TRUE)    
+cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]])    
 
 
 prev_demographics <- cdm[["prev_pat"]]  %>%
