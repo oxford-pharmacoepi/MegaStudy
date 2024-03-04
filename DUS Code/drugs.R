@@ -68,14 +68,14 @@ concept_drugs <- getDrugIngredientCodes(
 
 
 ## just to make sure the name is spelled correct
-c1_esterase_inhibitor <- getDrugIngredientCodes(
+c_1_esterase_inhibitor <- getDrugIngredientCodes(
   cdm,
   name = c("C1 esterase inhibitor"),
   doseForm = NULL,
   ingredientRange = c(1, 1),
   withConceptDetails = FALSE
 )
-concept_drugs[["c1_esterase_inhibitor"]] <- purrr::list_c(c1_esterase_inhibitor)
+concept_drugs[["c_1_esterase_inhibitor"]] <- purrr::list_c(c_1_esterase_inhibitor)
 
 
 
