@@ -8,8 +8,6 @@ concept_drugs <- getDrugIngredientCodes(
            "tocilizumab",
            "varenicline",
            
-           "C1 esterase inhibitor",
-           
            "belatacept",
            "ganirelix",
            "tigecycline",
@@ -67,6 +65,20 @@ concept_drugs <- getDrugIngredientCodes(
 
 
 ## other that need more doing ----------------------------------------------------------------------------
+
+
+## just to make sure the name is spelled correct
+c1_esterase_inhibitor <- getDrugIngredientCodes(
+  cdm,
+  name = c("C1 esterase inhibitor"),
+  doseForm = NULL,
+  ingredientRange = c(1, 1),
+  withConceptDetails = FALSE
+)
+concept_drugs[["c1_esterase_inhibitor"]] <- purrr::list_c(c1_esterase_inhibitor)
+
+
+
 
 ## certolizumab has two ingredient codes
 certolizumab <- getDrugIngredientCodes(

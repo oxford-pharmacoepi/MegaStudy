@@ -219,8 +219,6 @@ inc_analysis_id <- inc %>%
 cdm <- insertTable(cdm, "inc_pat", inc_pat)
 cdm$inc_pat <- omopgenerics::newCohortTable(cdm$inc_pat) 
 
-## no overlapping periods means per subject_id and cohort_definition_id
-
 
 info(logger, "WRITE INCIDENCE ATTRITION")
 write.csv(inc_attrition,
@@ -234,7 +232,7 @@ info(logger, "DEMOGRAPHICS INCIDENT PATIENTS")
 
 inc_demographics <- cdm[["inc_pat"]]  %>%
             addDemographics(
-              indexDate = "outcome_start_date",
+              indexDate = "cohort_start_date",
               age = TRUE,
               ageName = "age",
               ageGroup = list(
@@ -283,7 +281,7 @@ for (cov_ind in cov_indication){
               indicationCohortName = cov_ind,
               indicationGap = c(0,30,Inf),
               unknownIndicationTable = NULL,
-              indicationDate = "outcome_start_date"
+              indicationDate = "cohort_start_date"
             ) %>% 
             summariseIndication(
               strata = list("Calendar Year" = "calendar_year")
@@ -312,7 +310,7 @@ inc_lsc <- cdm[["inc_pat"]]  %>%
               strata = list("Calendar Year" = "calendar_year"),
               eventInWindow = "condition_occurrence",       ## refers to start_date of condition
               episodeInWindow = "drug_exposure",            ## looks at start and end date (drug_era are collapsed exposures with standard gaps), not all DP have drug_era filled
-              indexDate = "outcome_start_date",
+              indexDate = "cohort_start_date",
               censorDate = NULL,
               minimumFrequency = 0.05,                      ## it is a proportion: 5% threshold
               excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
@@ -451,11 +449,9 @@ names <- c("tenecteplase",
 inc_use_summary <- tibble::as_tibble(NULL)
 for (j in seq_along(ingredients)) {
   ingredient <- ingredients[j]
-  name <- names[j]  
-
-  use_drug_cohort <- cdm[["inc_pat"]] %>%     
-    filter(str_detect(outcome_cohort_name, str_sub(name, 1, 8)) | str_detect(outcome_cohort_name, str_sub(name, -8))
-           ) %>%   #### this will not work for all databases ## move to the R side or write a function that filters with ifelse()
+  name <- names[j]
+  
+  use_drug_cohort <- applyFilterIngforUse(cdm[["inc_pat"]], name) %>%
     addDrugUse(
       ingredientConceptId = ingredient ,
       duration = TRUE,
@@ -483,9 +479,6 @@ for (j in seq_along(ingredients)) {
 
 write.csv(inc_use_summary, here("storage", paste0(
   "inc_use_summary_", cdmName(cdm), ".csv")))
-
-## during postprocess include demographics information in other tables as well
-
 
 
 ## Generate prevalent drug cohorts---------------------------------------------------------------------------------------------------------------------------
@@ -562,7 +555,7 @@ cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]])
 
 prev_demographics <- cdm[["prev_pat"]]  %>%
   addDemographics(
-    indexDate = "outcome_start_date",
+    indexDate = "cohort_start_date",
     age = TRUE,
     ageName = "age",
     ageGroup = list(
@@ -609,7 +602,7 @@ for (cov_ind in cov_indication){
       indicationCohortName = cov_ind,
       indicationGap = c(0,30,Inf),
       unknownIndicationTable = NULL,
-      indicationDate = "outcome_start_date"
+      indicationDate = "cohort_start_date"
     ) %>% 
     summariseIndication(
       strata = list("Calendar Year" = "calendar_year")
@@ -639,7 +632,7 @@ prev_lsc <- cdm[["prev_pat"]]  %>%
     strata = list("Calendar Year" = "calendar_year"),
     eventInWindow = "condition_occurrence",       ## refers to start_date of condition
     episodeInWindow = "drug_exposure",            ## looks at start and end date (drug_era are collapsed exposures with standard gaps), not all DP have drug_era filled
-    indexDate = "outcome_start_date",
+    indexDate = "cohort_start_date",
     censorDate = NULL,
     minimumFrequency = 0.05,                      ## it is a proportion: 5% threshold
     excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
@@ -663,10 +656,8 @@ for (j in seq_along(ingredients)) {
   ingredient <- ingredients[j]
   name <- names[j]  
   
-  use_drug_cohort <- cdm[["prev_pat"]] %>% 
-    filter(str_detect(outcome_cohort_name, str_sub(name, 1, 8)) | str_detect(outcome_cohort_name, str_sub(name, -8))
-    ) %>% 
-    addDrugUse(
+  use_drug_cohort <- applyFilterIngforUse(cdm[["prev_pat"]], name) %>%
+   addDrugUse(
       ingredientConceptId = ingredient ,
       duration = TRUE,
       quantity = TRUE,
