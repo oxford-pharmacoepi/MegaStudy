@@ -308,12 +308,12 @@ inc_lsc <- cdm[["inc_pat"]]  %>%
                 c(-Inf, -30), c(-Inf, -1),  c(-30, -1), c(0, 0), c(1, 7),c(8,Inf),c(1,Inf)
               ),
               strata = list("Calendar Year" = "calendar_year"),
-              eventInWindow = "condition_occurrence",       ## refers to start_date of condition
-              episodeInWindow = "drug_exposure",            ## looks at start and end date (drug_era are collapsed exposures with standard gaps), not all DP have drug_era filled
+              eventInWindow = "condition_occurrence",       
+              episodeInWindow = "drug_exposure",            
               indexDate = "cohort_start_date",
               censorDate = NULL,
-              minimumFrequency = 0.05,                      ## it is a proportion: 5% threshold
-              excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
+              minimumFrequency = 0.05,                      
+              excludedCodes = NULL) %>%                     
   suppress(minCellCount = 5) %>%                
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
   inner_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
@@ -630,12 +630,12 @@ prev_lsc <- cdm[["prev_pat"]]  %>%
       c(-Inf, -30), c(-Inf, -1),  c(-30, -1), c(0, 0), c(1, 7),c(8,Inf),c(1,Inf)
     ),
     strata = list("Calendar Year" = "calendar_year"),
-    eventInWindow = "condition_occurrence",       ## refers to start_date of condition
-    episodeInWindow = "drug_exposure",            ## looks at start and end date (drug_era are collapsed exposures with standard gaps), not all DP have drug_era filled
+    eventInWindow = "condition_occurrence",       
+    episodeInWindow = "drug_exposure",           
     indexDate = "cohort_start_date",
     censorDate = NULL,
-    minimumFrequency = 0.05,                      ## it is a proportion: 5% threshold
-    excludedCodes = NULL) %>%                     ## maybe exclude things like blood pressure measurement or those frequent generic codes, can do in post-processing
+    minimumFrequency = 0.05,                    
+    excludedCodes = NULL) %>%                  
   suppress(minCellCount = 5) %>%  
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
   inner_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
@@ -684,8 +684,6 @@ for (j in seq_along(ingredients)) {
 
 write.csv(prev_use_summary, here("storage", paste0(
   "prev_use_summary_", cdmName(cdm), ".csv")))
-
-## during postprocess include demographics information in other tables as well
 
 
 ## zip everything together ---
