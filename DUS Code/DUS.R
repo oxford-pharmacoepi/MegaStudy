@@ -329,6 +329,8 @@ write.csv(inc_lsc, here("storage", paste0(
 ## characterisation of drug use of incident patients ---------------------
 info(logger, "DRUG USE INCIDENT PATIENTS")
 
+source("applyFilterIngforUse.R")
+
 ingredients <- as.integer(c(19098548,
                  1347450,
                  1594587,
@@ -650,8 +652,6 @@ write.csv(prev_lsc, here("storage", paste0(
 
 ## characterisation of drug use of prevalent patients ---------------------
 info(logger, "DRUG USE PREVALENT PATIENTS")
-
-source("applyFilterIngforUse.R")
 
 prev_use_summary <- tibble::as_tibble(NULL)
 for (j in seq_along(ingredients)) {
