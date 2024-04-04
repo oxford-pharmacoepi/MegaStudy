@@ -69,7 +69,6 @@ name_indication <- c("neutropenia",
                      "cataract_surgery",
                      "meningitis",
                      "urogenital_surgery",
-                     "prostatic_surgery",
                      "gastrointestinal_surgery",
                      "colorectal_surgery",
                      "endocarditis",
@@ -80,15 +79,13 @@ name_indication <- c("neutropenia",
                      "gonorrhea",
                      "otitis_media",
                      "osteomyelitis",
-                     "cellulitis",
+                     "cellulitis_erysipelas_woundinfection",
                      "pyelonephritis",
-                     "cystitis",
+                     "cystitis_bacteriuria",
                      "sinusitis",
                      "helicobacter_pylori",
                      "typhoid",
-                     "bacteriuria",
                      "tonsillitis_pharyngitis",
-                     "erysipelas",
                      "rheumatic_fever",
                      "yaws_pinta",
                      "gingivitis",
@@ -98,19 +95,17 @@ name_indication <- c("neutropenia",
                      "fabry",
                      "gaucher",
                      "assisted_reproduction",
-                     "implant",
-                     "transplant",
+                     "implant_transplant",
                      "apl",
                      "hereditary_angioedema",
-                     "smoking",
+                     "smoking_cessation",
                      "rheumatoid_arthritis",
                      "giant_cell_arteritis",
                      "jia",
-                     "pcv",
-                     "scs",
-                     "cnv",
+                     "pcv_cnv",
+                     "csc",
                      "exudative_amd",
-                     "catheter",
+                     "catheter_flushing",
                      "ischemic_stroke",
                      "pe",
                      "mi")
@@ -120,6 +115,8 @@ for (ind in name_indication) {
   ind_obj <- get(ind)
   ind_list <- list(as.integer(ind_obj$concept_id))
   names(ind_list) <- ind
+  
+  info(logger, paste0(ind))
   
   cdm <- generateConceptCohortSet(
     cdm,
@@ -162,6 +159,8 @@ inc_attrition <- tibble::as_tibble(NULL)
 inc_pat <- tibble::as_tibble(NULL)
 for (i in seq_along(concept_drugs)){
 
+info(logger, paste0(names(concept_drugs[i])))
+  
 cdm <- generateDrugUtilisationCohortSet(
   cdm,
   name = "drug_cohorts",
@@ -308,7 +307,7 @@ inc_lsc <- cdm[["inc_pat"]]  %>%
                 c(-Inf, -30), c(-Inf, -1),  c(-30, -1), c(0, 0), c(1, 7),c(8,Inf),c(1,Inf)
               ),
               strata = list("Calendar Year" = "calendar_year"),
-              eventInWindow = "condition_occurrence",       
+              eventInWindow = c("condition_occurrence","observation","measurement"),       
               episodeInWindow = "drug_exposure",            
               indexDate = "cohort_start_date",
               censorDate = NULL,
@@ -452,6 +451,8 @@ inc_use_summary <- tibble::as_tibble(NULL)
 for (j in seq_along(ingredients)) {
   ingredient <- ingredients[j]
   name <- names[j]
+  
+  info(logger, paste0(ingredient))
   
   use_drug_cohort <- applyFilterIngforUse(cdm[["inc_pat"]], name) %>%
     addDrugUse(
@@ -632,7 +633,7 @@ prev_lsc <- cdm[["prev_pat"]]  %>%
       c(-Inf, -30), c(-Inf, -1),  c(-30, -1), c(0, 0), c(1, 7),c(8,Inf),c(1,Inf)
     ),
     strata = list("Calendar Year" = "calendar_year"),
-    eventInWindow = "condition_occurrence",       
+    eventInWindow = c("condition_occurrence","observation","measurement"),   
     episodeInWindow = "drug_exposure",           
     indexDate = "cohort_start_date",
     censorDate = NULL,
@@ -657,6 +658,8 @@ prev_use_summary <- tibble::as_tibble(NULL)
 for (j in seq_along(ingredients)) {
   ingredient <- ingredients[j]
   name <- names[j]  
+  
+  info(logger, paste0(ingredient))
   
   use_drug_cohort <- applyFilterIngforUse(cdm[["prev_pat"]], name) %>%
    addDrugUse(
