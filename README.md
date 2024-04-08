@@ -2,9 +2,9 @@
 
 This repository contains all code and shiny applications for the MegaStudy
 
-## Phase of running Feasibility, and if you have passed, the Incidence Prevalence Code
+## Phase of running Feasibility, and if you have passed, go the Incidence Prevalence Code
 
-The DUS code is not ready yet as it is in testing phase. Information will follow in March/April.
+## If you have checked your IncidencePrevalence Results and uploaded them to the EHDEN teams space, go to the DUS Code
 
 ## Issues
 
