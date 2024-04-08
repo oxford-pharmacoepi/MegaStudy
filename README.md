@@ -2,7 +2,7 @@
 
 This repository contains all code and shiny applications for the MegaStudy
 
-## Phase of running Feasibility, and if you have passed, go the Incidence Prevalence Code
+## Run Feasibility, and if you have receive a pass in the EHDEN spreadsheet, run the Incidence Prevalence Code
 
 ## If you have checked your IncidencePrevalence Results and uploaded them to the EHDEN teams space, go to the DUS Code
 
