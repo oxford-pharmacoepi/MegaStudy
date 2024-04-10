@@ -119,8 +119,10 @@ incidence_attrition <- list()
 for(i in seq_along(incidence_attrition_files)){
   incidence_attrition[[i]]<-readr::read_csv(incidence_attrition_files[[i]], 
                                             show_col_types = FALSE)  %>%
-    mutate(excluded_records = as.numeric(excluded_records),
-           excluded_subjects = as.numeric(excluded_subjects))
+    mutate(number_subjects = as.character(number_subjects)) %>%
+    select(c("cdm_name", "reason","outcome_cohort_name", 
+             "number_subjects","denominator_target_cohort_name",
+             "denominator_age_group","denominator_sex","denominator_days_prior_observation"))
 }
 incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
@@ -156,9 +158,11 @@ prevalence_attrition_files<-prevalence_attrition_files[stringr::str_detect(preva
 prevalence_attrition <- list()
 for(i in seq_along(prevalence_attrition_files)){
   prevalence_attrition[[i]]<-readr::read_csv(prevalence_attrition_files[[i]], 
-                                             show_col_types = FALSE) %>%
-    mutate(excluded_records = as.numeric(excluded_records),
-           excluded_subjects = as.numeric(excluded_subjects))
+                                             show_col_types = FALSE)  %>%
+    mutate(number_subjects = as.character(number_subjects)) %>%
+    select(c("cdm_name", "reason","outcome_cohort_name", 
+             "number_subjects","denominator_target_cohort_name",
+             "denominator_age_group","denominator_sex","denominator_days_prior_observation")) 
 }
 prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
