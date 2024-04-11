@@ -216,7 +216,7 @@ inc_analysis_id <- inc %>%
 }
 
 cdm <- insertTable(cdm, "inc_pat", inc_pat)
-cdm$inc_pat <- omopgenerics::newCohortTable(cdm$inc_pat) 
+cdm$inc_pat <- omopgenerics::newCohortTable(cdm[["inc_pat"]], .softValidation = TRUE) 
 
 
 info(logger, "WRITE INCIDENCE ATTRITION")
@@ -553,7 +553,7 @@ write.csv(prev_attrition,
 info(logger, "CHARACTERISATION PREVALENT PATIENTS")
 
 cdm <- insertTable(cdm, "prev_pat", prev_pat)
-cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]])    
+cdm$prev_pat <- omopgenerics::newCohortTable(cdm[["prev_pat"]], .softValidation = TRUE)    
 
 
 prev_demographics <- cdm[["prev_pat"]]  %>%
