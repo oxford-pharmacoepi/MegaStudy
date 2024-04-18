@@ -57,6 +57,9 @@ nice.num.count<-function(x) {
 # read in alternative grouping -----
 drug_alternative <- read.csv('drug_alternatives.csv')
 
+# read in data type for each database ------
+databases <- read.csv('databases.csv')
+
 
 # unzip results -----
 zip_files <- list.files(here("data"), full.names = TRUE, recursive = TRUE)
@@ -108,7 +111,8 @@ incidence <- dplyr::bind_rows(incidence) %>%
                                                   denominator_target_cohort_name)) %>% 
   filter(n_events > 0,
          denominator_days_prior_observation == 30)  %>%
-  left_join(drug_alternative, by = "outcome_cohort_name") 
+  left_join(drug_alternative, by = "outcome_cohort_name") %>%
+  left_join(databases, by = "cdm_name")
   
 
 # incidence_attrition  ------
@@ -149,7 +153,8 @@ prevalence <- dplyr::bind_rows(prevalence) %>%
                                                   "General population",
                                                   denominator_target_cohort_name))  %>%
   filter(denominator_days_prior_observation == 0) %>%
-  left_join(drug_alternative, by = "outcome_cohort_name") 
+  left_join(drug_alternative, by = "outcome_cohort_name") %>%
+  left_join(databases, by = "cdm_name")
 
 # prevalence_attrition  ------
 prevalence_attrition_files<-results[stringr::str_detect(results, ".csv")]

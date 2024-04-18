@@ -1,0 +1,26 @@
+﻿cdm_name,data_type,country
+ULSBV,secondary,Portugal
+ULSEDV,secondary,Portugal
+ULSGE,secondary,Portugal
+IPCI,primary,Netherlands
+PRISIB,EHR P+S,Spain
+CPRD_GOLD,primary,UK
+IncPrev_UZB_structured,secondary,Belgium
+ULSM,EHR P+S,Portugal
+AZGR_structured,secondary,Belgium
+BARDENA,EHR P+S,Spain
+BG,registry,Bulgaria
+CHA CAN,secondary,Germany
+CHCZ,secondary,Serbia
+hulafe bbdd,secondary,Spain
+IMASIS,secondary,Spain
+ReumaPT,registry,Portugal
+INGEF FDB (PROD),claims P+S,Germany
+MAITT,claims P+S,Estonia
+NCR,registry,Netherlands
+papageorgiou,secondary,Greece
+Pharmetrics+,claims P+S,USA
+University of Turku (PCASF),secondary,Finland
+VID_CONSIGN,EHR P+S,Spain
+Viecuri,secondary,Netherlands
+CPRDAurum2309,primary,UK

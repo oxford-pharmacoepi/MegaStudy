@@ -80,6 +80,8 @@ server <- function(input, output, session) {
       filter(cdm_name %in% input$incidence_estimates_cdm_name) %>%
       filter(outcome_cohort_name %in% input$incidence_estimates_outcome_cohort_name) %>%
       filter(group %in% input$incidence_estimates_group) %>%
+      filter(data_type %in% input$incidence_estimates_data_type) %>%
+      filter(country %in% input$incidence_estimates_country) %>%
       filter(denominator_target_cohort_name %in% input$incidence_estimates_denominator_target_cohort_name) %>%
       filter(denominator_age_group %in% input$incidence_estimates_denominator_age_group) %>%
       filter(denominator_sex %in% input$incidence_estimates_denominator_sex) %>%
@@ -167,6 +169,8 @@ server <- function(input, output, session) {
       filter(cdm_name %in% input$prevalence_estimates_cdm_name) %>%
       filter(outcome_cohort_name %in% input$prevalence_estimates_outcome_cohort_name) %>%
       filter(group %in% input$prevalence_estimates_group) %>%
+      filter(data_type %in% input$prevalence_estimates_data_type) %>%
+      filter(country %in% input$prevalence_estimates_country) %>%
       filter(denominator_target_cohort_name %in% input$prevalence_estimates_denominator_target_cohort_name) %>%
       filter(denominator_age_group %in% input$prevalence_estimates_denominator_age_group) %>%
       filter(denominator_sex %in% input$prevalence_estimates_denominator_sex) %>%
