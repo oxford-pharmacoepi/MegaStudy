@@ -256,7 +256,7 @@ summariseCharacteristics(
   cohortIntersect = list(),
   conceptIntersect = list(),
   otherVariables = character()
-) %>% suppress(minCellCount = 5) %>%
+) %>% suppress(minCellCount = 10) %>%
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
                left_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
   select(-"cohort_definition_id") %>%
@@ -284,7 +284,7 @@ for (cov_ind in cov_indication){
             ) %>% 
             summariseIndication(
               strata = list("Calendar Year" = "calendar_year")
-              ) %>% suppress(minCellCount = 5) %>%
+              ) %>% suppress(minCellCount = 10) %>%
    mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
    inner_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
    select(-"cohort_definition_id") %>% 
@@ -313,7 +313,7 @@ inc_lsc <- cdm[["inc_pat"]]  %>%
               censorDate = NULL,
               minimumFrequency = 0.05,                      
               excludedCodes = NULL) %>%                     
-  suppress(minCellCount = 5) %>%                
+  suppress(minCellCount = 10) %>%                
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
   inner_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
   select(-"cohort_definition_id") %>% 
@@ -469,7 +469,7 @@ for (j in seq_along(ingredients)) {
     ) %>%
     summariseDrugUse(
       strata = list("Calendar Year" = "calendar_year")
-      ) %>%  suppress(minCellCount = 5) %>%
+      ) %>%  suppress(minCellCount = 10) %>%
     mutate(variable_level = name) %>%
     mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
     inner_join(cdm[["inc_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
@@ -583,7 +583,7 @@ prev_demographics <- cdm[["prev_pat"]]  %>%
     cohortIntersect = list(),
     conceptIntersect = list(),
     otherVariables = character()
-  ) %>% suppress(minCellCount = 5) %>%
+  ) %>% suppress(minCellCount = 10) %>%
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
   left_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
   select(-"cohort_definition_id") %>%
@@ -609,7 +609,7 @@ for (cov_ind in cov_indication){
     ) %>% 
     summariseIndication(
       strata = list("Calendar Year" = "calendar_year")
-    ) %>% suppress(minCellCount = 5) %>%
+    ) %>% suppress(minCellCount = 10) %>%
     mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
     inner_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
     select(-"cohort_definition_id") %>% 
@@ -639,7 +639,7 @@ prev_lsc <- cdm[["prev_pat"]]  %>%
     censorDate = NULL,
     minimumFrequency = 0.05,                    
     excludedCodes = NULL) %>%                  
-  suppress(minCellCount = 5) %>%  
+  suppress(minCellCount = 10) %>%  
   mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
   inner_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
   select(-"cohort_definition_id") %>% 
@@ -676,7 +676,7 @@ for (j in seq_along(ingredients)) {
     ) %>%
     summariseDrugUse(
       strata = list("Calendar Year" = "calendar_year")
-    ) %>%  suppress(minCellCount = 5) %>% 
+    ) %>%  suppress(minCellCount = 10) %>% 
     mutate(variable_level = name) %>%
     mutate(cohort_definition_id = as.integer(str_sub(group_level, 8))) %>%
     inner_join(cdm[["prev_pat"]] %>% select(cohort_definition_id, outcome_cohort_name) %>% distinct(), by = c("cohort_definition_id"), copy = TRUE ) %>%
