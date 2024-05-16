@@ -161,6 +161,37 @@ server <- function(input, output, session) {
     plotincidence()
    })
   
+  ### update dropdowns
+  observeEvent(input$incidence_estimates_group, {
+    # Filter the data based on the selected groups
+    filtered_incidence <- incidence[incidence$group %in% input$incidence_estimates_group,]
+
+
+    unique_cdm_names <- sort(unique(filtered_incidence$cdm_name))
+    unique_outcome_cohort_names <- sort(unique(filtered_incidence$outcome_cohort_name))
+    unique_data_types <- sort(unique(filtered_incidence$data_type))
+    unique_countries <- sort(unique(filtered_incidence$country))
+
+
+    updatePickerInput(session, inputId = "incidence_estimates_cdm_name",
+                         choices = unique_cdm_names,
+                         selected = unique_cdm_names)
+    
+    updatePickerInput(session, inputId = "incidence_estimates_outcome_cohort_name",
+                      choices = unique_outcome_cohort_names,
+                      selected = unique_outcome_cohort_names)
+    
+    updatePickerInput(session, inputId = "incidence_estimates_data_type",
+                      choices = unique_data_types,
+                      selected = unique_data_types)
+    
+    updatePickerInput(session, inputId = "incidence_estimates_country",
+                      choices = unique_countries,
+                      selected = unique_countries)
+  })
+
+
+  
   ## prevalence_estimates ----
   ### get estimates ----
   getprevalence <- reactive({
@@ -250,6 +281,37 @@ server <- function(input, output, session) {
   output$prevalence_estimates_plot <- renderPlotly({
     plotprevalence()
   })
+  
+  ### update dropdowns
+  observeEvent(input$prevalence_estimates_group, {
+    # Filter the data based on the selected groups
+    filtered_prevalence <- prevalence[prevalence$group %in% input$prevalence_estimates_group,]
+    
+    
+    unique_cdm_names <- sort(unique(filtered_prevalence$cdm_name))
+    unique_outcome_cohort_names <- sort(unique(filtered_prevalence$outcome_cohort_name))
+    unique_data_types <- sort(unique(filtered_prevalence$data_type))
+    unique_countries <- sort(unique(filtered_prevalence$country))
+    
+    
+    updatePickerInput(session, inputId = "prevalence_estimates_cdm_name",
+                      choices = unique_cdm_names,
+                      selected = unique_cdm_names)
+    
+    updatePickerInput(session, inputId = "prevalence_estimates_outcome_cohort_name",
+                      choices = unique_outcome_cohort_names,
+                      selected = unique_outcome_cohort_names)
+    
+    updatePickerInput(session, inputId = "prevalence_estimates_data_type",
+                      choices = unique_data_types,
+                      selected = unique_data_types)
+    
+    updatePickerInput(session, inputId = "prevalence_estimates_country",
+                      choices = unique_countries,
+                      selected = unique_countries)
+  })
+  
+
   
 }
 

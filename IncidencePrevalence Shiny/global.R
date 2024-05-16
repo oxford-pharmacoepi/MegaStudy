@@ -178,4 +178,4 @@ prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>%
          denominator_days_prior_observation == 0) %>%
   select(c("cdm_name", "reason","outcome_cohort_name", 
            "number_subjects")) 
- 
+

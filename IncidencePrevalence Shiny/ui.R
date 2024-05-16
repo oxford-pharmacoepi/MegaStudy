@@ -151,10 +151,10 @@ ui <- dashboardPage(
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
-            inputId = "incidence_estimates_cdm_name",
-            label = "CDM name",
-            choices = unique(incidence$cdm_name),
-            selected = unique(incidence$cdm_name),
+            inputId = "incidence_estimates_group",
+            label = "Group",
+            choices = sort(unique(incidence$group)),
+            selected = unique(incidence$group),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
@@ -173,10 +173,10 @@ ui <- dashboardPage(
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
-            inputId = "incidence_estimates_group",
-            label = "Group",
-            choices = sort(unique(incidence$group)),
-            selected = unique(incidence$group),
+            inputId = "incidence_estimates_cdm_name",
+            label = "CDM name",
+            choices = sort(unique(incidence$cdm_name)),
+            selected = unique(incidence$cdm_name),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
@@ -385,10 +385,10 @@ ui <- dashboardPage(
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
-            inputId = "prevalence_estimates_cdm_name",
-            label = "CDM name",
-            choices = unique(prevalence$cdm_name),
-            selected = unique(prevalence$cdm_name),
+            inputId = "prevalence_estimates_group",
+            label = "Group",
+            choices = sort(unique(prevalence$group)),
+            selected = unique(prevalence$group),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
@@ -407,10 +407,10 @@ ui <- dashboardPage(
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
-            inputId = "prevalence_estimates_group",
-            label = "Group",
-            choices = sort(unique(prevalence$group)),
-            selected = unique(prevalence$group),
+            inputId = "prevalence_estimates_cdm_name",
+            label = "CDM name",
+            choices = unique(prevalence$cdm_name),
+            selected = unique(prevalence$cdm_name),
             options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
             multiple = TRUE
           )
