@@ -61,8 +61,8 @@ tigecycline,drug_resistant
 meropenem,drug_resistant
 piperacillin_tazobactam,drug_resistant
 ceftozolane_tazobactam,drug_resistant
-penicillin_v,antibiotics,common_infection
-penicillin_g,antibiotics,common_infection
+penicillin_v,common_infection
+penicillin_g,common_infection
 amoxicillin,common_infection
 ceftriaxone,serious_infection
 cefotaxime,serious_infection
