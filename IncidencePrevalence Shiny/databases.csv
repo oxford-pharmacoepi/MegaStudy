@@ -32,3 +32,4 @@ MKTSCAN_CLAIMS_OMOP,claims P+S,USA
 OPTUM_CLAIMS_OMOP,claims P+S,USA
 OPTUM_EHR_5PCT_OMOP,claims P+S,USA
 MEGA (UZA),secondary,Belgium
+SIDIAP,primary,Spain
