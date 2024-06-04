@@ -1,35 +1,36 @@
 ﻿cdm_name,data_type,country
+AZGR_structured,secondary,Belgium
+CHA CAN,secondary,Germany
+CPRD_GOLD,primary,UK
+CHCZ,secondary,Serbia
+CPRDAurum2309,primary,UK
 ULSBV,secondary,Portugal
 ULSEDV,secondary,Portugal
 ULSGE,secondary,Portugal
-IPCI,primary,Netherlands
+VID_CONSIGN,EHR P+S,Spain
 PRISIB,EHR P+S,Spain
-CPRD_GOLD,primary,UK
+hulafe bbdd,secondary,Spain
+SIDIAP,EHR P+S,Spain
+NCR,registry,Netherlands
+IMASIS,secondary,Spain
+INGEF FDB (PROD),claims P+S,Germany
+ITF_CFM,secondary,Turkey
+COMNet,secondary,Italy
+BG,registry,Bulgaria
+OPCRD,UK,Primary care
+papageorgiou,secondary,Greece
+ReumaPT,registry,Portugal
+BARDENA,EHR P+S,Spain
+TAUH,secondary,Finland
+IPCI,primary,Netherlands
+MEGA (UZA),secondary,Belgium
+MAITT,claims P+S,Estonia
+Viecuri,secondary,Netherlands
 IncPrev_UZB_structured,secondary,Belgium
 ULSM,EHR P+S,Portugal
-AZGR_structured,secondary,Belgium
-BARDENA,EHR P+S,Spain
-BG,registry,Bulgaria
-CHA CAN,secondary,Germany
-CHCZ,secondary,Serbia
-hulafe bbdd,secondary,Spain
-IMASIS,secondary,Spain
-ReumaPT,registry,Portugal
-INGEF FDB (PROD),claims P+S,Germany
-MAITT,claims P+S,Estonia
-NCR,registry,Netherlands
-papageorgiou,secondary,Greece
 Pharmetrics+,claims P+S,USA
 University of Turku (PCASF),secondary,Finland
-VID_CONSIGN,EHR P+S,Spain
-Viecuri,secondary,Netherlands
-CPRDAurum2309,primary,UK
 CPRDAurum50,primary,UK
-COMNet,secondary,Italy
-ITF_CFM,secondary,Turkey
-TAUH,secondary,Finland
 MKTSCAN_CLAIMS_OMOP,claims P+S,USA
 OPTUM_CLAIMS_OMOP,claims P+S,USA
 OPTUM_EHR_5PCT_OMOP,claims P+S,USA
-MEGA (UZA),secondary,Belgium
-SIDIAP,primary,Spain
