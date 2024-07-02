@@ -1,4 +1,5 @@
 source("global.R")
+source("functions.R")
 
 # server shiny ----
 server <- function(input, output, session) {
@@ -78,6 +79,7 @@ server <- function(input, output, session) {
   get_inc_patient_characteristics <- reactive({
     
     inc_patient_characteristics <- inc_patient_characteristics %>% 
+      filter(group %in% input$inc_chars_group) %>%
       filter(cdm_name %in% input$inc_chars_cdm) %>% 
       filter(group_level %in% input$inc_chars_group_level) %>%
       filter(variable_name %in% input$inc_chars_variable_name) %>%
@@ -88,9 +90,14 @@ server <- function(input, output, session) {
         by = c("strata_name", "strata_level")
       )
     inc_patient_characteristics  <- inc_patient_characteristics %>% 
-      select(!c(1,"additional_name","group_name","additional_level","result_type"))
+      select(!c(1,"additional_name","group_name","additional_level","result_type")) %>% 
+      filter(strata_level != "overall",
+             estimate_name %in% c("percentage","median")
+      ) %>%
+      mutate(variable_level = ifelse(is.na(variable_level),variable_name,variable_level)) %>%
+      filter(!is.na(estimate))
     
-    inc_patient_characteristics
+    inc_patient_characteristics 
   })
   
   output$raw_inc_patient_characteristics <- renderDataTable({
@@ -105,9 +112,42 @@ server <- function(input, output, session) {
       write.csv(get_inc_patient_characteristics(), file, row.names = FALSE)
     }
   )
+  ### make plot ----
+  plotinc_patient_characteristics <- reactive({
+    table <- get_inc_patient_characteristics()
+    validate(need(nrow(table) > 0, "No results for selected inputs"))
+    colour_name <- paste0(input$inc_patient_characteristics_plot_colour, collapse = "; ")
+    plotInc_patient_characteristics(
+      table,
+      x = input$inc_patient_characteristics_plot_x,
+      ylim = c(0, NA),
+      facet = input$inc_patient_characteristics_plot_facet,
+      colour = "variable_level",
+      colour_name = "variable_level"
+    )
+  })
+  ### download plot ----
+  output$inc_patient_characteristics_download_plot <- downloadHandler(
+    filename = function() {
+      "inc_patient_characteristicsPlot.png"
+    },
+    content = function(file) {
+      ggsave(
+        file,
+        plotinc_patient_characteristics(),
+        width = as.numeric(input$inc_patient_characteristics_download_width),
+        height = as.numeric(input$inc_patient_characteristics_download_height),
+        dpi = as.numeric(input$inc_patient_characteristics_download_dpi),
+        units = "cm"
+      )
+    }
+  )
+  ### plot ----
+  output$inc_patient_characteristics_plot <- renderPlot({
+    plotinc_patient_characteristics()
+  })
   
 
-  
   # inc_lsc ----
   get_inc_large_scale_characteristics <- reactive({
     

@@ -57,6 +57,8 @@ nice.num.count<-function(x) {
 # read in alternative grouping -----
 drug_alternative <- read.csv('drug_alternatives.csv')
 
+# read in data type for each database ------
+databases <- read.csv('databases.csv')
 
 # unzip results -----
 zip_files <- list.files(here("data"), full.names = TRUE, recursive = TRUE)
@@ -102,7 +104,8 @@ incidence_attrition <- list()
 for(i in seq_along(incidence_attrition_files)){
   incidence_attrition[[i]]<-readr::read_csv(incidence_attrition_files[[i]], 
                                             show_col_types = FALSE) %>% 
-    mutate(excluded_records = as.numeric(excluded_records))
+    mutate(excluded_records = as.numeric(excluded_records),
+           excluded_subjects = as.numeric(excluded_subjects))
 }
 incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
@@ -121,15 +124,17 @@ inc_patient_characteristics_files<-inc_patient_characteristics_files[stringr::st
 inc_patient_characteristics <- list()
 for(i in seq_along(inc_patient_characteristics_files)){
   inc_patient_characteristics[[i]]<-readr::read_csv(inc_patient_characteristics_files[[i]], 
-                                                show_col_types = FALSE) %>%
+                                                show_col_types = FALSE) %>% 
     mutate(estimate_value = as.numeric(estimate_value)) %>%
     mutate(estimate_value = round(estimate_value,1)) %>%
-    select(-"group_level") %>%
+    select(-"group_level",-"estimate_type") %>%
     rename(group_level = outcome_cohort_name,
            estimate = estimate_value) %>%
     relocate(group_level, .after = group_name)
 }
-inc_patient_characteristics <- dplyr::bind_rows(inc_patient_characteristics)
+inc_patient_characteristics <- dplyr::bind_rows(inc_patient_characteristics) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
 
 
 inc_chars_strataOpsChars <- inc_patient_characteristics %>%
@@ -147,14 +152,18 @@ inc_large_scale_characteristics <- list()
 for(i in seq_along(inc_large_scale_characteristics_files)){
   inc_large_scale_characteristics[[i]]<-readr::read_csv(inc_large_scale_characteristics_files[[i]], 
                                                     show_col_types = FALSE) %>%
-    mutate(estimate_value = as.numeric(estimate_value)) %>%
+    mutate(estimate_value = as.numeric(estimate_value),
+           additional_level = as.character(additional_level)) %>%
     mutate(estimate_value = round(estimate_value,1)) %>%
     select(-"group_level") %>%
     rename(group_level = outcome_cohort_name,
            estimate = estimate_value) %>%
     relocate(group_level, .after = group_name)
 }
-inc_large_scale_characteristics <- dplyr::bind_rows(inc_large_scale_characteristics)
+inc_large_scale_characteristics <- dplyr::bind_rows(inc_large_scale_characteristics) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
+
 table(inc_large_scale_characteristics$strata_name)
 
 
@@ -179,7 +188,9 @@ for(i in seq_along(inc_indication_files)){
            estimate = estimate_value) %>%
     relocate(group_level, .after = group_name)
 }
-inc_indication <- dplyr::bind_rows(inc_indication)
+inc_indication <- dplyr::bind_rows(inc_indication) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
 
 
 inc_indication_strataOpsChars <- inc_indication %>%
@@ -209,7 +220,9 @@ for(i in seq_along(inc_use_summary_files)){
   }
   
 }
-inc_use_summary <- dplyr::bind_rows(inc_use_summary)
+inc_use_summary <- dplyr::bind_rows(inc_use_summary) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
 
 
 inc_use_strataOpsChars <- inc_use_summary %>%
@@ -228,7 +241,8 @@ prevalence_attrition <- list()
 for(i in seq_along(prevalence_attrition_files)){
   prevalence_attrition[[i]]<-readr::read_csv(prevalence_attrition_files[[i]], 
                                              show_col_types = FALSE)  %>% 
-    mutate(excluded_records = as.numeric(excluded_records))
+    mutate(excluded_records = as.numeric(excluded_records),
+           excluded_subjects = as.numeric(excluded_subjects))
 }
 prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>% 
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
@@ -255,7 +269,9 @@ for(i in seq_along(prev_patient_characteristics_files)){
            estimate = estimate_value) %>%
     relocate(group_level, .after = group_name)
 }
-prev_patient_characteristics <- dplyr::bind_rows(prev_patient_characteristics)
+prev_patient_characteristics <- dplyr::bind_rows(prev_patient_characteristics) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
 
 
 prev_chars_strataOpsChars <- prev_patient_characteristics %>%
@@ -273,14 +289,18 @@ prev_large_scale_characteristics <- list()
 for(i in seq_along(prev_large_scale_characteristics_files)){
   prev_large_scale_characteristics[[i]]<-readr::read_csv(prev_large_scale_characteristics_files[[i]], 
                                                         show_col_types = FALSE) %>%
-    mutate(estimate_value = as.numeric(estimate_value)) %>%
+    mutate(estimate_value = as.numeric(estimate_value),
+           additional_level = as.character(additional_level)) %>%
     mutate(estimate_value = round(estimate_value,1)) %>%
     select(-"group_level") %>%
     rename(group_level = outcome_cohort_name,
            estimate = estimate_value) %>%
     relocate(group_level, .after = group_name)
 }
-prev_large_scale_characteristics <- dplyr::bind_rows(prev_large_scale_characteristics)
+prev_large_scale_characteristics <- dplyr::bind_rows(prev_large_scale_characteristics) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
+
 table(prev_large_scale_characteristics$strata_name)
 
 
@@ -306,7 +326,9 @@ for(i in seq_along(prev_indication_files)){
            estimate = estimate_value) %>%
     relocate(group_level, .after = group_name)
 }
-prev_indication <- dplyr::bind_rows(prev_indication)
+prev_indication <- dplyr::bind_rows(prev_indication) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
 
 
 prev_indication_strataOpsChars <- prev_indication %>%
@@ -337,7 +359,9 @@ for(i in seq_along(prev_use_summary_files)){
   }
   
 }
-prev_use_summary <- dplyr::bind_rows(prev_use_summary)
+prev_use_summary <- dplyr::bind_rows(prev_use_summary) %>% 
+  left_join(drug_alternative, by = c("group_level" = "outcome_cohort_name")) %>%
+  left_join(databases, by = "cdm_name")
 
 
 

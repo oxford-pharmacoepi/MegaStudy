@@ -174,9 +174,24 @@ ui <- dashboardPage(
       ),
       
       ### incident patients ----
+      ## characteristics
       tabItem(
         tabName = "inc_chars",
+        h3("Demographic characterisation"),
+        p("Estimates are shown below, please select configuration to filter them:"),
+        p("Group, database, study outcome, and characterisation"),
         tags$hr(),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "inc_chars_group",
+            label = "Group",
+            choices = sort(unique(inc_patient_characteristics$group)),
+            selected = unique(inc_patient_characteristics$group),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
@@ -223,19 +238,100 @@ ui <- dashboardPage(
         ),
         tags$hr(),
         tabsetPanel(
-          type = "tabs",
-          tabPanel(
-            "Raw data",
-            tags$hr(),
-            downloadButton("download_inc_patient_characteristics_raw", "Download csv data"),
-            DTOutput("raw_inc_patient_characteristics") %>%
-              withSpinner()
-          )
-        )
-      ),
+              type = "tabs",
+              tabPanel(
+                "Raw data",
+                downloadButton("download_inc_patient_characteristics_raw", "Download csv data"),
+                DTOutput("raw_inc_patient_characteristics") %>%
+                  withSpinner()
+              ),
+              tabPanel(
+                "Plots",
+                p("Plotting options"),
+                div(
+                  style = "display: inline-block;vertical-align:top; width: 150px;",
+                  pickerInput(
+                    inputId = "inc_patient_characteristics_plot_x",
+                    label = "x axis",
+                    choices = c("strata_level"),
+                    selected = "strata_level",
+                    list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+                    multiple = FALSE
+                  )
+                ),
+                div(
+                  style = "display: inline-block;vertical-align:top; width: 150px;",
+                  pickerInput(
+                    inputId = "inc_patient_characteristics_plot_facet",
+                    label = "Facet by",
+                    choices = c("group_level","cdm_name"),
+                    selected = c("group_level","cdm_name"),
+                    list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+                    multiple = TRUE
+                  )
+                ),
+                div(
+                  style = "display: inline-block;vertical-align:top; width: 150px;",
+                  pickerInput(
+                    inputId = "inc_patient_characteristics_plot_colour",
+                    label = "Colour by",
+                    choices = c("variable_level"),
+                    selected = "variable_level",
+                    list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+                    multiple = TRUE
+                  )
+                ),
+                plotOutput(
+                  "inc_patient_characteristics_plot",
+                  height = "1100px",
+                  width = "1550px"
+                ) %>%
+                  withSpinner(),
+                h4("Download figure"),
+                div("height:", style = "display: inline-block; font-weight: bold; margin-right: 5px;"),
+                div(
+                  style = "display: inline-block;",
+                  textInput("inc_patient_characteristics_download_height", "", 10, width = "50px")
+                ),
+                div("cm", style = "display: inline-block; margin-right: 25px;"),
+                div("width:", style = "display: inline-block; font-weight: bold; margin-right: 5px;"),
+                div(
+                  style = "display: inline-block;",
+                  textInput("inc_patient_characteristics_download_width", "", 20, width = "50px")
+                ),
+                div("cm", style = "display: inline-block; margin-right: 25px;"),
+                div("dpi:", style = "display: inline-block; font-weight: bold; margin-right: 5px;"),
+                div(
+                  style = "display: inline-block; margin-right:",
+                  textInput("inc_patient_characteristics_download_dpi", "", 300, width = "50px")
+                ),
+                downloadButton("inc_patient_characteristics_download_plot", "Download plot")
+              )
+            )
+          ),
+            
+            
+            
+            
+            
       # lsc ------
       tabItem(
         tabName = "inc_lsc",
+        h3("Large Scale characterisation"),
+        p("Estimates are shown below, please select configuration to filter them:"),
+        p("Group, database, study outcome, and characterisation"),
+        tags$hr(),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "inc_lsc_group",
+            label = "Group",
+            choices = sort(unique(inc_large_scale_characteristics$group)),
+            selected = unique(inc_large_scale_characteristics$group),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
@@ -288,6 +384,21 @@ ui <- dashboardPage(
       # indication ------
       tabItem(
         tabName = "inc_indication",
+        h3("Indication"),
+        p("Estimates are shown below, please select configuration to filter them:"),
+        p("Group, database, study outcome, and characterisation"),
+        tags$hr(),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "inc_indication_group",
+            label = "Group",
+            choices = sort(unique(inc_indication$group)),
+            selected = unique(inc_indication$group),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
@@ -353,6 +464,21 @@ ui <- dashboardPage(
       # inc_use -------
       tabItem(
         tabName = "inc_use",
+        h3("Drug use"),
+        p("Estimates are shown below, please select configuration to filter them:"),
+        p("Group, database, study outcome, and characterisation"),
+        tags$hr(),
+        div(
+          style = "display: inline-block;vertical-align:top; width: 150px;",
+          pickerInput(
+            inputId = "inc_use_group",
+            label = "Group",
+            choices = sort(unique(inc_use_summary$group)),
+            selected = unique(inc_use_summary$group),
+            options = list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
+            multiple = TRUE
+          )
+        ),
         div(
           style = "display: inline-block;vertical-align:top; width: 150px;",
           pickerInput(
@@ -436,6 +562,7 @@ ui <- dashboardPage(
         )
       ),
       ### prevalent patients ----
+      ## characteristics
       tabItem(
         tabName = "prev_chars",
         tags$hr(),
