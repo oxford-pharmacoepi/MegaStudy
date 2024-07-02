@@ -19,6 +19,7 @@ renv::activate()
 renv::restore()
 ```
 
+
 Please create a “data” folder on the same level as the .Rproj into which
 you upload your zip file: Results\_“dbName”.zip. RStudio automatically
 unzips the files ending up in the “data” folder. In the end, your “data”
@@ -32,6 +33,14 @@ prev_use_summary\_“dbName”.csv, prevalence_attrition\_“dbName”.csv
 
 If you have several databases, you will have several copies of those
 files each with a different “dbName”.
+
+### IMPORTANT
+
+Please add your database cdm_name, data_type and country to the file
+databases.csv or remove the existing content and just leave your own
+entries. The use of the completely filled databases.csv file that you
+downloaded with the Rproject is used to add the information about data
+dype and country when looking at all the databases together.
 
 Then open global.R and click “Run App” in the top right corner.
 
