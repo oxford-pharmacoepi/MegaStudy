@@ -332,7 +332,7 @@ ui <- dashboardPage(
                 inputId = "incidence_estimates_plot_facet",
                 label = "Facet by",
                 choices = c("group","cdm_name", "outcome_cohort_name", "denominator_target_cohort_name", "denominator_age_group", "denominator_sex", "denominator_days_prior_observation", "denominator_start_date", "denominator_end_date", "analysis_outcome_washout", "analysis_repeated_events", "analysis_complete_database_intervals", "analysis_min_cell_count", "analysis_interval", "incidence_start_date"),
-                selected = c("cdm_name","group"),
+                selected = "cdm_name",
                 list(`actions-box` = TRUE, size = 10, `selected-text-format` = "count > 3"),
                 multiple = TRUE
               )

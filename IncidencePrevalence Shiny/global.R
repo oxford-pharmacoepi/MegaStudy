@@ -152,9 +152,11 @@ prevalence <- dplyr::bind_rows(prevalence) %>%
   mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
                                                   "General population",
                                                   denominator_target_cohort_name))  %>%
-  filter(denominator_days_prior_observation == 0) %>%
+  filter(n_cases > 0,
+         denominator_days_prior_observation == 0) %>%
   left_join(drug_alternative, by = "outcome_cohort_name") %>%
   left_join(databases, by = "cdm_name")
+
 
 # prevalence_attrition  ------
 prevalence_attrition_files<-results[stringr::str_detect(results, ".csv")]

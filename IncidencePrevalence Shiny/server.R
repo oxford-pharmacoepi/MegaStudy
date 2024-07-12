@@ -214,9 +214,9 @@ server <- function(input, output, session) {
       mutate(
         n_cases = round(suppressWarnings(as.numeric(n_cases))),
         n_population = round(suppressWarnings(as.numeric(n_population))),
-        prevalence = round(suppressWarnings(as.numeric(prevalence)), 4),
-        prevalence_95CI_lower = round(suppressWarnings(as.numeric(prevalence_95CI_lower)), 4),
-        prevalence_95CI_upper = round(suppressWarnings(as.numeric(prevalence_95CI_upper)), 4))
+        prevalence = round(suppressWarnings(as.numeric(prevalence)), 5),
+        prevalence_95CI_lower = round(suppressWarnings(as.numeric(prevalence_95CI_lower)), 5),
+        prevalence_95CI_upper = round(suppressWarnings(as.numeric(prevalence_95CI_upper)), 5))
   })
   ### download table ----
   output$prevalence_estimates_download_table <- downloadHandler(
