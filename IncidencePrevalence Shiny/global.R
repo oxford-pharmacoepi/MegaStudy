@@ -106,7 +106,8 @@ for(i in seq_along(incidence_files)){
                                   show_col_types = FALSE)
 }
 incidence <- dplyr::bind_rows(incidence) %>% 
-  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
+  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
+                                                    denominator_target_cohort_name == "None",
                                                   "General population",
                                                   denominator_target_cohort_name)) %>% 
   filter(n_events > 0,
@@ -129,9 +130,10 @@ for(i in seq_along(incidence_attrition_files)){
              "denominator_age_group","denominator_sex","denominator_days_prior_observation"))
 }
 incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>% 
-  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
+  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
+                                                    denominator_target_cohort_name == "None",
                                                   "General population",
-                                                  denominator_target_cohort_name)) %>%
+                                                  denominator_target_cohort_name)) %>% 
   filter(denominator_age_group == "0 to 150",
          denominator_sex == "Both",
          denominator_days_prior_observation == 30) %>%
@@ -149,9 +151,10 @@ for(i in seq_along(prevalence_files)){
                                    show_col_types = FALSE) 
 }
 prevalence <- dplyr::bind_rows(prevalence) %>% 
-  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
+  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
+                                                    denominator_target_cohort_name == "None",
                                                   "General population",
-                                                  denominator_target_cohort_name))  %>%
+                                                  denominator_target_cohort_name)) %>% 
   filter(n_cases > 0,
          denominator_days_prior_observation == 0) %>%
   left_join(drug_alternative, by = "outcome_cohort_name") %>%
@@ -172,9 +175,10 @@ for(i in seq_along(prevalence_attrition_files)){
              "denominator_age_group","denominator_sex","denominator_days_prior_observation")) 
 }
 prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>% 
-  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name),
+  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
+                                                    denominator_target_cohort_name == "None",
                                                   "General population",
-                                                  denominator_target_cohort_name)) %>%
+                                                  denominator_target_cohort_name)) %>% 
   filter(denominator_age_group == "0 to 150",
          denominator_sex == "Both",
          denominator_days_prior_observation == 0) %>%
