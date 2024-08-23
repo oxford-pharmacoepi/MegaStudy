@@ -1,0 +1,72 @@
+﻿outcome_cohort_name,display_drug
+alteplase,alteplase
+tenecteplase,tenecteplase
+streptokinase,streptokinase
+urokinase,urokinase
+sarilumab,sarilumab
+abatacept,abatacept
+tofacitinib,tofacitinib
+baricitinib,baricitinib
+upadacitinib,upadacitinib
+etanercept,etanercept
+infliximab,infliximab
+certolizumab,certolizumab
+golimumab,golimumab
+anakinra,anakinra
+tocilizumab,tocilizumab
+verteporfin,verteporfin
+ranibizumab,ranibizumab
+bevacizumab,bevacizumab
+varenicline,varenicline
+nicotine,nicotine
+c1_esterase_inhibitor,c1 esterase inhibitor
+icatibant,icatibant
+ecallantide,ecallantide
+conestat_alfa,conestat alfa
+lanadelumab,lanadelumab
+berotralstat,berotralstat
+arsenic_trioxide,arsenic trioxide
+cytarabine_liposomal,cytarabine liposomal
+cytarabine_any,cytarabine any
+daunorubicin,daunorubicin
+cytarabine_daunorubicin,cytarabine plus daunorubicin
+idarubicin,idarubicin
+tretinoin_oral,tretinoin oral
+belatacept,belatacept
+mycophenolic_acid,mycophenolic acid
+sirolimus,sirolimus
+cyclosporine,cyclosporine
+tacrolimus_no_topical,tacrolimus no topical
+ganirelix,ganirelix
+cetrorelix,cetrorelix
+imiglucerase,imiglucerase
+velaglucerase_alfa,velaglucerase alfa
+taliglucerase_alfa,taliglucerase alfa
+agalsidase_beta,agalsidase beta
+agalsidase_alfa,agalsidase alfa
+tigecycline,tigecycline
+azithromycin,azithromycin
+clarithromycin,clarithromycin
+penicillin_v,phenoxymethylpenicillin
+penicillin_g,benzylpenicillin
+amoxicillin,amoxicillin
+ceftriaxone,ceftriaxone
+cefotaxime,cefotaxime
+meropenem,meropenem
+cefuroxime,cefuroxime
+piperacillin_tazobactam,piperacillin plus tazobactam
+amoxicillin_clavulanate,amoxicillin plus clavulanate
+ceftozolane_tazobactam,ceftozolane plus tazobactam
+tigecycline,tigecycline
+meropenem,meropenem
+piperacillin_tazobactam,piperacillin plus tazobactam
+ceftozolane_tazobactam,ceftozolane plus tazobactam
+penicillin_v,phenoxymethylpenicillin
+penicillin_g,benzylpenicillin
+amoxicillin,amoxicillin
+ceftriaxone,ceftriaxone
+cefotaxime,cefotaxime
+cefuroxime,cefuroxime
+amoxicillin_clavulanate,amoxicillin plus clavulanate
+azithromycin,azithromycin
+clarithromycin,clarithromycin

@@ -63,6 +63,9 @@ databases <- read.csv('databases.csv')
 # read in the database names for display -----
 names <- read.csv('meta_names_incprev.csv')
 
+# read in drug names for display ------
+drugs <- read.csv('meta_drugs_incprev.csv')
+
 
 # unzip results -----
 zip_files <- list.files(here("data"), full.names = TRUE, recursive = TRUE)
@@ -128,7 +131,10 @@ incidence <- dplyr::bind_rows(incidence) %>%
   left_join(databases, by = "cdm_name") %>%
   left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
   mutate(cdm_name = display_name) %>%
-  select(-c("display_name_full","display_name","Extra_info"))
+  select(-c("display_name_full","display_name","Extra_info")) %>%
+  left_join(drugs, by = c("outcome_cohort_name")) %>% 
+  mutate(outcome_cohort_name = display_drug) %>%
+  select(-"display_drug")
 
 
 # incidence_attrition  ------
@@ -155,7 +161,11 @@ incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>%
          denominator_sex == "Both",
          denominator_days_prior_observation == 30) %>%
   select(c("cdm_name", "reason","outcome_cohort_name", 
-           "number_subjects")) 
+           "number_subjects")) %>%
+  left_join(drugs, by = c("outcome_cohort_name")) %>% 
+  mutate(outcome_cohort_name = display_drug) %>%
+  select(-"display_drug") %>%
+  distinct()
 
 
 # prevalence  ------
@@ -179,7 +189,10 @@ prevalence <- dplyr::bind_rows(prevalence) %>%
   left_join(databases, by = "cdm_name") %>%
   left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
   mutate(cdm_name = display_name) %>%
-  select(-c("display_name_full","display_name","Extra_info"))
+  select(-c("display_name_full","display_name","Extra_info")) %>%
+  left_join(drugs, by = c("outcome_cohort_name")) %>% 
+  mutate(outcome_cohort_name = display_drug) %>%
+  select(-"display_drug")
 
 
 # prevalence_attrition  ------
@@ -206,4 +219,8 @@ prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>%
          denominator_sex == "Both",
          denominator_days_prior_observation == 0) %>%
   select(c("cdm_name", "reason","outcome_cohort_name", 
-           "number_subjects")) 
+           "number_subjects")) %>%
+  left_join(drugs, by = c("outcome_cohort_name")) %>% 
+  mutate(outcome_cohort_name = display_drug) %>%
+  select(-"display_drug") %>%
+  distinct()
