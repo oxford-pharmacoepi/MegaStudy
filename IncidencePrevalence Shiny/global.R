@@ -41,6 +41,7 @@ mytheme <- create_theme(
     link_hover_border_color = "#112446"
   )
 )
+
 # functions ----
 nice.num3<-function(x) {
   trimws(format(x,
@@ -53,19 +54,21 @@ nice.num.count<-function(x) {
                 big.mark=",", nsmall = 0, digits=1, scientific=FALSE))}
 
 
-
 # read in alternative grouping -----
 drug_alternative <- read.csv('drug_alternatives.csv')
 
 # read in data type for each database ------
 databases <- read.csv('databases.csv')
 
+# read in the database names for display -----
+names <- read.csv('meta_names_incprev.csv')
+
 
 # unzip results -----
 zip_files <- list.files(here("data"), full.names = TRUE, recursive = TRUE)
 for (i in zip_files) {
   if (endsWith(tolower(i), "zip")) {
-     unzip(i, exdir = dirname(i))
+    unzip(i, exdir = dirname(i))
     file.remove(i)
   } 
 }
@@ -89,12 +92,20 @@ for(i in seq_along(cdm_snapshot_files)){
 cdm_snapshot <- dplyr::bind_rows(cdm_snapshot)
 cdm_snapshot <- cdm_snapshot %>% 
   mutate(person_count = nice.num.count(person_count), 
-         observation_period_count = nice.num.count(observation_period_count)) %>% 
-  rename("Database name" = "cdm_name",
+         observation_period_count = nice.num.count(observation_period_count)) %>%
+  left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
+  select(-"cdm_name") %>%
+  rename("Database name - acronym" = "display_name",
+         "Database name - full" = "display_name_full",
          "Persons in the database" = "person_count",
          "Number of observation periods" = "observation_period_count",
          "OMOP CDM vocabulary version" = "vocabulary_version") %>% 
-  distinct()
+  select("Database name - acronym",
+         "Database name - full",
+         "Persons in the database",
+         "Number of observation periods",
+         "OMOP CDM vocabulary version") %>%
+  distinct() 
 
 # incidence ------
 incidence_files<-results[stringr::str_detect(results, ".csv")]
@@ -111,10 +122,14 @@ incidence <- dplyr::bind_rows(incidence) %>%
                                                   "General population",
                                                   denominator_target_cohort_name)) %>% 
   filter(n_events > 0,
-         denominator_days_prior_observation == 30)  %>%
+         denominator_days_prior_observation == 30,
+         incidence_start_date <= "2024-01-01")  %>%
   left_join(drug_alternative, by = "outcome_cohort_name") %>%
-  left_join(databases, by = "cdm_name")
-  
+  left_join(databases, by = "cdm_name") %>%
+  left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
+  mutate(cdm_name = display_name) %>%
+  select(-c("display_name_full","display_name","Extra_info"))
+
 
 # incidence_attrition  ------
 incidence_attrition_files<-results[stringr::str_detect(results, ".csv")]
@@ -129,8 +144,10 @@ for(i in seq_along(incidence_attrition_files)){
              "number_subjects","denominator_target_cohort_name",
              "denominator_age_group","denominator_sex","denominator_days_prior_observation"))
 }
-incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>% 
-  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
+incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>%
+  left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
+  mutate(cdm_name = display_name,
+         denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
                                                     denominator_target_cohort_name == "None",
                                                   "General population",
                                                   denominator_target_cohort_name)) %>% 
@@ -139,7 +156,7 @@ incidence_attrition <- dplyr::bind_rows(incidence_attrition) %>%
          denominator_days_prior_observation == 30) %>%
   select(c("cdm_name", "reason","outcome_cohort_name", 
            "number_subjects")) 
-incidence_attrition
+
 
 # prevalence  ------
 prevalence_files<-results[stringr::str_detect(results, ".csv")]
@@ -156,9 +173,13 @@ prevalence <- dplyr::bind_rows(prevalence) %>%
                                                   "General population",
                                                   denominator_target_cohort_name)) %>% 
   filter(n_cases > 0,
-         denominator_days_prior_observation == 0) %>%
+         denominator_days_prior_observation == 0,
+         prevalence_start_date <= "2024-01-01")  %>%
   left_join(drug_alternative, by = "outcome_cohort_name") %>%
-  left_join(databases, by = "cdm_name")
+  left_join(databases, by = "cdm_name") %>%
+  left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
+  mutate(cdm_name = display_name) %>%
+  select(-c("display_name_full","display_name","Extra_info"))
 
 
 # prevalence_attrition  ------
@@ -174,8 +195,10 @@ for(i in seq_along(prevalence_attrition_files)){
              "number_subjects","denominator_target_cohort_name",
              "denominator_age_group","denominator_sex","denominator_days_prior_observation")) 
 }
-prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>% 
-  mutate(denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
+prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>%
+  left_join(names %>% select("cdm_name","display_name","display_name_full"), by = c("cdm_name")) %>% 
+  mutate(cdm_name = display_name, 
+         denominator_target_cohort_name = if_else(is.na(denominator_target_cohort_name) |
                                                     denominator_target_cohort_name == "None",
                                                   "General population",
                                                   denominator_target_cohort_name)) %>% 
@@ -184,4 +207,3 @@ prevalence_attrition <- dplyr::bind_rows(prevalence_attrition) %>%
          denominator_days_prior_observation == 0) %>%
   select(c("cdm_name", "reason","outcome_cohort_name", 
            "number_subjects")) 
-
