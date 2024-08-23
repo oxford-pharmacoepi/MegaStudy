@@ -1,0 +1,42 @@
+cdm_name,display_name,display_name_full,missing_desc
+AZGR_structured,AZGR,AZ Groeninge,
+BARDENA,BARDENA,BARDENA,
+BG,BDR,Bulgarian Diabetes Register,
+CHA CAN,CHA CAN,Charité Berlin Cancer,
+CHCZ,CHCZ,Clinical Hospital Center Zvezdara,
+COMNET MODENA,COMNET MODENA,Modena Cancer Center of the AOU Policlinico,
+CPRD_GOLD,CPRD GOLD,Clinical Practice Research Datalink (CPRD) GOLD,
+CPRDAurum2309,CPRD Aurum,Clinical Practice Research Datalink (CPRD) Aurum,
+hulafe bbdd,HULAFE,Health Department Valencia-La Fe,
+HUS,HUS,Helsinki University Hospital,
+IMASIS,IMASIS,Hospital del Mar Electronic Health Record Information System,
+INGEF FDB (PROD),InGef RDB,InGef Research Database,
+IPCI,IPCI,The Integrated Primary Care Information,
+ITF_CDM,ITF CDM,Istanbul University (IU) Istanbul Faculty of Medicine,
+MAITT,MAITT,MAITT - University of Tartu,
+MEGA,UZA,University Hospital Antwerp,yes
+MKTSCAN_CLAIMS_OMOP,MarketScan,Merative MarketScan®,
+NCR,NCR,Netherlands Cancer Registry,
+OPCRD,OPCRD,Optimum Patient Care Research Database,
+OPTUM_CLAIMS_OMOP,Clinformatics,Optum Clinformatics®,
+papageorgiou,PGH,Papageorgiou General Hospital,
+Pharmetrics+,P+,IQVIA Pharmetrics+,
+PRISIB,PRISIB,PRISIB,
+ReumaPT,ReumaPT,Rheumatic Diseases Portuguese Registry,
+scifi-pearl,SCIFI-PEARL,Swedish Covid-19 Investigation for Future Insights – a Population Epidemiology Approach using Register Linkage,
+SIDIAP,SIDIAP,The Information System for Research in Primary Care,
+SUCD,SUCD,Semmelweis University (SU) Clinical Database,
+SWEMED,MEB KI,MEB KI,
+THIN_BE,THIN Belgium,THIN Belgium,yes
+THIN_ES,THIN Spain,THIN Spain,yes
+THIN_FR,THIN France,THIN France,yes
+THIN_IT,THIN Italy,THIN Italy,yes
+THIN_RO,THIN Romania,THIN Romania,yes
+THIN_UK,THIN UK,THIN UK,yes
+Turku,PCASF,University of Turku,
+ULSBV,ULSRA,Unidade Local de Saúde da Região de Aveiro,
+ULSEDV,ULSEDV,Unidade Local de Saúde de Entre Douro e Vouga,
+ULSGE,ULSGE,Unidade Local de Saúde de Gaia/Espinho,
+UM DRESDEN,UM DRESDEN,UM DRESDEN,
+VID_CONSIGN,VID CONSIGN,Valencia Health System Integrated Database (VID),
+Viecuri,Viecuri,VieCuri Medical Center Rheumatology Database,
