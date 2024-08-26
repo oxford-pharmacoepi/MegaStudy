@@ -1,36 +1,53 @@
-﻿cdm_name,data_type,country
-AZGR_structured,secondary,Belgium
-CHA CAN,secondary,Germany
-CPRD_GOLD,primary,UK
-CHCZ,secondary,Serbia
-CPRDAurum2309,primary,UK
-ULSBV,secondary,Portugal
-ULSEDV,secondary,Portugal
-ULSGE,secondary,Portugal
-VID_CONSIGN,EHR P+S,Spain
-PRISIB,EHR P+S,Spain
-hulafe bbdd,secondary,Spain
-SIDIAP,EHR P+S,Spain
-NCR,registry,Netherlands
-IMASIS,secondary,Spain
-INGEF FDB (PROD),claims P+S,Germany
-ITF_CFM,secondary,Türkiye
-COMNet,secondary,Italy
-BG,registry,Bulgaria
-OPCRD,UK,Primary care
-papageorgiou,secondary,Greece
-ReumaPT,registry,Portugal
-BARDENA,EHR P+S,Spain
-TAUH,secondary,Finland
-IPCI,primary,Netherlands
-MEGA (UZA),secondary,Belgium
-MAITT,claims P+S,Estonia
-Viecuri,secondary,Netherlands
-IncPrev_UZB_structured,secondary,Belgium
-ULSM,EHR P+S,Portugal
-Pharmetrics+,claims P+S,USA
-University of Turku (PCASF),secondary,Finland
-CPRDAurum50,primary,UK
-MKTSCAN_CLAIMS_OMOP,claims P+S,USA
-OPTUM_CLAIMS_OMOP,claims P+S,USA
-OPTUM_EHR_5PCT_OMOP,claims P+S,USA
+cdm_name,data_type,country,Extra_info
+AZGR_structured,secondary,Belgium,
+BARDENA,EHR P+S,Spain,
+BG,registry,Bulgaria,
+CHA CAN,secondary,Germany,
+CHCZ,secondary,Serbia,
+COMNet,secondary,Italy,duplicated
+COMNET MODENA,secondary,Italy,duplicated
+CPRD_GOLD,primary,UK,
+CPRDAurum2309,primary,UK,
+CPRDAurum50,primary,UK,excluded
+hulafe bbdd,EHR P+S,Spain,
+IMASIS,secondary,Spain,
+IncPrev_UZB_structured,secondary,Belgium,
+INGEF FDB (PROD),claims P+S,Germany,
+IPCI,primary,Netherlands,
+ITF_CDM,secondary,Turkey,
+MAITT,claims P+S,Estonia,
+MEGA,secondary,Belgium,MEGA (UZA)
+MKTSCAN_CLAIMS_OMOP,claims P+S,USA,
+NCR,registry,Netherlands,
+OPCRD,primary,UK,
+OPTUM_CLAIMS_OMOP,claims P+S,USA,
+OPTUM_EHR_5PCT_OMOP,claims P+S,USA,excluded
+papageorgiou,secondary,Greece,
+Pharmetrics+,claims P+S,USA,
+PRISIB,EHR P+S,Spain,
+ReumaPT,registry,Portugal,
+SIDIAP,primary,Spain,
+SWEMED,EHR P+S,Sweden,
+TAUH,secondary,Finland,Excluded
+Turku,secondary,Finland,
+ULSBV,secondary,Portugal,
+ULSEDV,secondary,Portugal,
+ULSGE,secondary,Portugal,
+ULSM,EHR P+S,Portugal,
+University of Turku (PCASF),secondary,Finland,
+VID_CONSIGN,EHR P+S,Spain,
+Viecuri,secondary,Netherlands,
+CDM_APHM,secondary,France,
+SUCD,secondary,Hungary,
+ATENEA_OMOP,secondary,Spain,
+UM DRESDEN,secondary,Germany,
+THIN_RO,primary,Romania,
+THIN_ES,primary,Spain,
+THIN_FR,primary,France,
+THIN_UK,primary,UK,
+THIN_BE,primary,Belgium,
+THIN_IT,primary,Italy,
+HUS,secondary,Finland,
+hus,secondary,Finland,dupliacte
+scifi-pearl,EHR P+S,Sweden,
+scifi_pearl,EHR P+S,Sweden,dupliacte
